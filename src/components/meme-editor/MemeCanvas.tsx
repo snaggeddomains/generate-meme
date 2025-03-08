@@ -93,7 +93,8 @@ const MemeCanvas = ({
                   color: text.color,
                   fontFamily: text.fontFamily,
                   textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000',
-                  userSelect: 'none'
+                  userSelect: 'none',
+                  backgroundColor: 'transparent'
                 }}
                 onClick={() => onTextSelect(text.id)}
                 onMouseDown={(e) => onTextMouseDown(e, text.id)}

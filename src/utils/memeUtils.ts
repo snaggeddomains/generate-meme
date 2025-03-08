@@ -1,3 +1,4 @@
+
 // Google Drive public ID format: Convert the sharing URL to a direct image URL
 export const convertGoogleDriveUrl = (url: string) => {
   // Extract the file ID from the Google Drive sharing URL
@@ -90,7 +91,12 @@ export const downloadMeme = (canvasRef: React.RefObject<HTMLDivElement>, onSucce
   if (!canvasRef.current) return;
   
   import('html2canvas').then(({ default: html2canvas }) => {
-    html2canvas(canvasRef.current!).then(canvas => {
+    html2canvas(canvasRef.current!, { 
+      backgroundColor: null,  // Set background to transparent
+      allowTaint: true,
+      useCORS: true,
+      scale: 2  // Improve quality with higher scale
+    }).then(canvas => {
       const link = document.createElement('a');
       link.download = 'generated-meme.png';
       link.href = canvas.toDataURL('image/png');
