@@ -7,68 +7,68 @@ import { Button } from "@/components/ui/button";
 const Templates = () => {
   const templates = [
     {
-      url: '/lovable-uploads/9581f077-87c7-4013-bd4b-72f8abb319a2.png',
-      name: 'Zac Efron Money'
+      url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200',
+      name: 'Smiling Woman'
     },
     {
-      url: '/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png',
-      name: 'Highway Exit'
+      url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200',
+      name: 'Smiling Man'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Kermit Inner Me'
+      url: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1200',
+      name: 'Business Man'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Will Smith Slap'
+      url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200',
+      name: 'Colorful Woman'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Shaq Hot Ones'
+      url: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1200',
+      name: 'Surprised Man'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Taken Phone Call'
+      url: 'https://images.unsplash.com/photo-1579591919791-0e3737ae3808?auto=format&fit=crop&w=1200',
+      name: 'Frustrated Man'
     },
     {
-      url: '/placeholder.svg',
-      name: 'John Cena Confused'
+      url: 'https://images.unsplash.com/photo-1590086782957-93c06ef21604?auto=format&fit=crop&w=1200',
+      name: 'Laughing Man'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Red Button Choice'
+      url: 'https://images.unsplash.com/photo-1603775020644-eb8decd79994?auto=format&fit=crop&w=1200',
+      name: 'Confused Person'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Spongebob Mocking'
+      url: 'https://images.unsplash.com/photo-1528892952291-009c663ce843?auto=format&fit=crop&w=1200',
+      name: 'Confident Man'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Hide The Pain Harold'
+      url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200',
+      name: 'Fashion Model'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Matt Damon Aging'
+      url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200',
+      name: 'Serious Man'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Predator Handshake'
+      url: 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?auto=format&fit=crop&w=1200',
+      name: 'Thinking Person'
     },
     {
-      url: '/placeholder.svg',
-      name: 'The Office Handshake'
+      url: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=1200',
+      name: 'Happy Woman'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Dave Chappelle'
+      url: 'https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?auto=format&fit=crop&w=1200',
+      name: 'Coffee Man'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Drake Hotline Bling'
+      url: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?auto=format&fit=crop&w=1200',
+      name: 'Face Close-up'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Distracted Boyfriend'
+      url: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1200',
+      name: 'Professional Woman'
     }
   ];
 

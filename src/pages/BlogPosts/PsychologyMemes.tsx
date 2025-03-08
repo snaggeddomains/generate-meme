@@ -14,6 +14,20 @@ const PsychologyMemes = () => {
         date="June 15, 2023"
         author="Dr. Emma Richards"
         category="Meme Culture"
+        image="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1200"
+        tags={["Psychology", "Viral Content", "Internet Culture", "Social Media"]}
+        relatedPosts={[
+          {
+            title: "How Brands Are Using Memes for Marketing",
+            slug: "meme-marketing",
+            image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800"
+          },
+          {
+            title: "The Evolution of Memes Through History",
+            slug: "meme-history",
+            image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=800"
+          }
+        ]}
         content={`
 <p class="mb-4">What makes a meme go viral? Why do some images with witty captions spread across the internet like wildfire while others fade into obscurity? The psychology behind viral memes provides fascinating insights into human behavior, social connection, and cultural communication.</p>
 

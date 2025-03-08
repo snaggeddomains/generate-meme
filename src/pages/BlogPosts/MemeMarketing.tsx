@@ -14,6 +14,20 @@ const MemeMarketing = () => {
         date="July 28, 2023"
         author="Marcus Johnson"
         category="Digital Marketing"
+        image="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200"
+        tags={["Marketing", "Brand Strategy", "Social Media", "Digital Marketing"]}
+        relatedPosts={[
+          {
+            title: "The Psychology Behind Viral Memes",
+            slug: "psychology-memes",
+            image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800"
+          },
+          {
+            title: "How Gen Z Uses Memes as Communication",
+            slug: "memes-gen-z",
+            image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=800"
+          }
+        ]}
         content={`
 <p class="mb-4">In the ever-evolving landscape of digital marketing, brands are constantly searching for authentic ways to connect with audiences. Enter meme marketing – a strategy that leverages the cultural phenomenon of shareable, relatable content to build brand awareness and engagement. This approach has transformed how companies communicate in the digital age, allowing them to speak the language of their audience in a refreshingly authentic way.</p>
 
