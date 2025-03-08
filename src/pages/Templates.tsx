@@ -5,8 +5,17 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
+// Convert a Google Drive sharing URL to a direct image URL
+const convertGoogleDriveUrl = (url: string) => {
+  const fileIdMatch = url.match(/\/d\/(.*?)\/view/);
+  if (fileIdMatch && fileIdMatch[1]) {
+    return `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`;
+  }
+  return url;
+};
+
 const Templates = () => {
-  // Updated templates with the newly uploaded images
+  // Updated templates with the newly uploaded images and Google Drive template
   const templates = [
     {
       url: '/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png',
@@ -22,6 +31,11 @@ const Templates = () => {
       url: '/lovable-uploads/ec952d3a-5d11-4172-a488-ea4792c5a0dc.png',
       name: 'Will Smith Slap',
       fallback: 'https://images.unsplash.com/photo-1518770660439-4636190af475'
+    },
+    {
+      url: convertGoogleDriveUrl('https://drive.google.com/file/d/1pFKi6tTj_YP_6Izn5Vp_eE6b4t15YZUQ/view?usp=drive_link'),
+      name: 'Drake Meme',
+      fallback: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6'
     }
   ];
 

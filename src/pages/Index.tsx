@@ -5,6 +5,14 @@ import Footer from "@/components/Footer";
 import { ArrowRight, Smile, Share2, Download, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
 
+const convertGoogleDriveUrl = (url: string) => {
+  const fileIdMatch = url.match(/\/d\/(.*?)\/view/);
+  if (fileIdMatch && fileIdMatch[1]) {
+    return `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`;
+  }
+  return url;
+};
+
 const Index = () => {
   const features = [
     {
@@ -44,6 +52,11 @@ const Index = () => {
       url: '/lovable-uploads/ec952d3a-5d11-4172-a488-ea4792c5a0dc.png',
       name: 'Will Smith Slap',
       fallback: 'https://images.unsplash.com/photo-1518770660439-4636190af475'
+    },
+    {
+      url: convertGoogleDriveUrl('https://drive.google.com/file/d/1pFKi6tTj_YP_6Izn5Vp_eE6b4t15YZUQ/view?usp=drive_link'),
+      name: 'Drake Meme',
+      fallback: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6'
     }
   ];
 

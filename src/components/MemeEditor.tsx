@@ -63,6 +63,16 @@ const MemeEditor = () => {
     "#F97316", // Orange
   ];
 
+  // Google Drive public ID format: Convert the sharing URL to a direct image URL
+  const convertGoogleDriveUrl = (url: string) => {
+    // Extract the file ID from the Google Drive sharing URL
+    const fileIdMatch = url.match(/\/d\/(.*?)\/view/);
+    if (fileIdMatch && fileIdMatch[1]) {
+      return `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`;
+    }
+    return url;
+  };
+
   const templateImages = [
     {
       url: '/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png',
@@ -75,6 +85,10 @@ const MemeEditor = () => {
     {
       url: '/lovable-uploads/ec952d3a-5d11-4172-a488-ea4792c5a0dc.png',
       name: 'Will Smith Slap'
+    },
+    {
+      url: convertGoogleDriveUrl('https://drive.google.com/file/d/1pFKi6tTj_YP_6Izn5Vp_eE6b4t15YZUQ/view?usp=drive_link'),
+      name: 'Drake Meme'
     }
   ];
 
@@ -88,6 +102,9 @@ const MemeEditor = () => {
       if (!isNaN(Number(templateParam)) && Number(templateParam) > 0 && Number(templateParam) <= templateImages.length) {
         const index = Number(templateParam) - 1;
         setImage(templateImages[index].url);
+      } else if (templateParam.includes('drive.google.com')) {
+        // Handle Google Drive links
+        setImage(convertGoogleDriveUrl(templateParam));
       } else {
         setImage(templateParam);
       }
@@ -240,7 +257,11 @@ const MemeEditor = () => {
 
   const useTemplateImage = (templateUrl: string) => {
     setImageLoading(true);
-    setImage(templateUrl);
+    // Convert Google Drive URLs to direct image URLs if needed
+    const imageUrl = templateUrl.includes('drive.google.com') 
+      ? convertGoogleDriveUrl(templateUrl) 
+      : templateUrl;
+    setImage(imageUrl);
     setImageLoading(false);
     toast.success("Template loaded successfully");
   };
