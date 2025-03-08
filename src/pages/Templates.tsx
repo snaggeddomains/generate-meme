@@ -7,67 +7,67 @@ import { Button } from "@/components/ui/button";
 const Templates = () => {
   const templates = [
     {
-      url: '/lovable-uploads/When Your Parents Ask Where All Your Money Went - Zac Efron, High School Musical 2.jpg',
+      url: '/lovable-uploads/9581f077-87c7-4013-bd4b-72f8abb319a2.png',
       name: 'Zac Efron Money'
     },
     {
-      url: '/lovable-uploads/Highway Exit - Guy Swerving Car.jpg',
+      url: '/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png',
       name: 'Highway Exit'
     },
     {
-      url: '/lovable-uploads/Kermit Inner Me.jpg',
+      url: '/placeholder.svg',
       name: 'Kermit Inner Me'
     },
     {
-      url: '/lovable-uploads/Will Smith Slap.jpg',
+      url: '/placeholder.svg',
       name: 'Will Smith Slap'
     },
     {
-      url: '/lovable-uploads/Shaq Hot Ones.jpg',
+      url: '/placeholder.svg',
       name: 'Shaq Hot Ones'
     },
     {
-      url: '/lovable-uploads/Liam Neeson Taken Phone Call.jpg',
+      url: '/placeholder.svg',
       name: 'Taken Phone Call'
     },
     {
-      url: '/lovable-uploads/John Cena Confused.jpg',
+      url: '/placeholder.svg',
       name: 'John Cena Confused'
     },
     {
-      url: '/lovable-uploads/Red Button Choice Panic.jpg',
+      url: '/placeholder.svg',
       name: 'Red Button Choice'
     },
     {
-      url: '/lovable-uploads/Spongebob Mocking.jpg',
+      url: '/placeholder.svg',
       name: 'Spongebob Mocking'
     },
     {
-      url: '/lovable-uploads/Hide The Pain Harold.jpg',
+      url: '/placeholder.svg',
       name: 'Hide The Pain Harold'
     },
     {
-      url: '/lovable-uploads/Matt Damon Aging.jpg',
+      url: '/placeholder.svg',
       name: 'Matt Damon Aging'
     },
     {
-      url: '/lovable-uploads/Predator Epic Handshake.jpg',
+      url: '/placeholder.svg',
       name: 'Predator Handshake'
     },
     {
-      url: '/lovable-uploads/The Office Handshake.jpg',
+      url: '/placeholder.svg',
       name: 'The Office Handshake'
     },
     {
-      url: '/lovable-uploads/Dave Chappelle.jpg',
+      url: '/placeholder.svg',
       name: 'Dave Chappelle'
     },
     {
-      url: '/lovable-uploads/Drake Hotline Bling.jpg',
+      url: '/placeholder.svg',
       name: 'Drake Hotline Bling'
     },
     {
-      url: '/lovable-uploads/Distracted Boyfriend.jpg',
+      url: '/placeholder.svg',
       name: 'Distracted Boyfriend'
     }
   ];

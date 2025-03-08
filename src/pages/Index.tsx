@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
@@ -31,27 +30,27 @@ const Index = () => {
 
   const popularTemplates = [
     {
-      url: '/lovable-uploads/When Your Parents Ask Where All Your Money Went - Zac Efron, High School Musical 2.jpg',
+      url: '/lovable-uploads/9581f077-87c7-4013-bd4b-72f8abb319a2.png',
       name: 'Zac Efron Money'
     },
     {
-      url: '/lovable-uploads/Highway Exit - Guy Swerving Car.jpg',
+      url: '/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png',
       name: 'Highway Exit'
     },
     {
-      url: '/lovable-uploads/Kermit Inner Me.jpg',
+      url: '/placeholder.svg',
       name: 'Kermit Inner Me'
     },
     {
-      url: '/lovable-uploads/Will Smith Slap.jpg',
+      url: '/placeholder.svg',
       name: 'Will Smith Slap'
     },
     {
-      url: '/lovable-uploads/Shaq Hot Ones.jpg',
+      url: '/placeholder.svg',
       name: 'Shaq Hot Ones'
     },
     {
-      url: '/lovable-uploads/Hide The Pain Harold.jpg',
+      url: '/placeholder.svg',
       name: 'Hide The Pain Harold'
     }
   ];
