@@ -7,68 +7,68 @@ import { Button } from "@/components/ui/button";
 const Templates = () => {
   const templates = [
     {
-      url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200',
-      name: 'Smiling Woman'
+      url: '/lovable-uploads/When Your Parents Ask Where All Your Money Went - Zac Efron, High School Musical 2.jpg',
+      name: 'Zac Efron Money'
     },
     {
-      url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200',
-      name: 'Smiling Man'
+      url: '/lovable-uploads/Highway Exit - Guy Swerving Car.jpg',
+      name: 'Highway Exit'
     },
     {
-      url: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1200',
-      name: 'Business Man'
+      url: '/lovable-uploads/Kermit Inner Me.jpg',
+      name: 'Kermit Inner Me'
     },
     {
-      url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200',
-      name: 'Colorful Woman'
+      url: '/lovable-uploads/Will Smith Slap.jpg',
+      name: 'Will Smith Slap'
     },
     {
-      url: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1200',
-      name: 'Surprised Man'
+      url: '/lovable-uploads/Shaq Hot Ones.jpg',
+      name: 'Shaq Hot Ones'
     },
     {
-      url: 'https://images.unsplash.com/photo-1579591919791-0e3737ae3808?auto=format&fit=crop&w=1200',
-      name: 'Frustrated Man'
+      url: '/lovable-uploads/Liam Neeson Taken Phone Call.jpg',
+      name: 'Taken Phone Call'
     },
     {
-      url: 'https://images.unsplash.com/photo-1590086782957-93c06ef21604?auto=format&fit=crop&w=1200',
-      name: 'Laughing Man'
+      url: '/lovable-uploads/John Cena Confused.jpg',
+      name: 'John Cena Confused'
     },
     {
-      url: 'https://images.unsplash.com/photo-1603775020644-eb8decd79994?auto=format&fit=crop&w=1200',
-      name: 'Confused Person'
+      url: '/lovable-uploads/Red Button Choice Panic.jpg',
+      name: 'Red Button Choice'
     },
     {
-      url: 'https://images.unsplash.com/photo-1528892952291-009c663ce843?auto=format&fit=crop&w=1200',
-      name: 'Confident Man'
+      url: '/lovable-uploads/Spongebob Mocking.jpg',
+      name: 'Spongebob Mocking'
     },
     {
-      url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200',
-      name: 'Fashion Model'
+      url: '/lovable-uploads/Hide The Pain Harold.jpg',
+      name: 'Hide The Pain Harold'
     },
     {
-      url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200',
-      name: 'Serious Man'
+      url: '/lovable-uploads/Matt Damon Aging.jpg',
+      name: 'Matt Damon Aging'
     },
     {
-      url: 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?auto=format&fit=crop&w=1200',
-      name: 'Thinking Person'
+      url: '/lovable-uploads/Predator Epic Handshake.jpg',
+      name: 'Predator Handshake'
     },
     {
-      url: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=1200',
-      name: 'Happy Woman'
+      url: '/lovable-uploads/The Office Handshake.jpg',
+      name: 'The Office Handshake'
     },
     {
-      url: 'https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?auto=format&fit=crop&w=1200',
-      name: 'Coffee Man'
+      url: '/lovable-uploads/Dave Chappelle.jpg',
+      name: 'Dave Chappelle'
     },
     {
-      url: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?auto=format&fit=crop&w=1200',
-      name: 'Face Close-up'
+      url: '/lovable-uploads/Drake Hotline Bling.jpg',
+      name: 'Drake Hotline Bling'
     },
     {
-      url: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1200',
-      name: 'Professional Woman'
+      url: '/lovable-uploads/Distracted Boyfriend.jpg',
+      name: 'Distracted Boyfriend'
     }
   ];
 
@@ -83,7 +83,7 @@ const Templates = () => {
           {templates.map((template, index) => (
             <Link 
               key={index} 
-              to={`/create?template=${index + 1}`}
+              to={`/create?template=${template.url}`}
               className="block rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
             >
               <div className="aspect-square overflow-hidden">
@@ -91,6 +91,11 @@ const Templates = () => {
                   src={template.url} 
                   alt={`${template.name} template`}
                   className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = 'https://placehold.co/400x400/lightgray/darkgray?text=Loading+Failed';
+                  }}
                 />
               </div>
               <div className="p-3 text-center text-sm font-medium">

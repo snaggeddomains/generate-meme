@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { useLocation } from "react-router-dom";
 import { 
   Download, 
   Type, 
@@ -37,6 +37,7 @@ const MemeEditor = () => {
   const [isDragging, setIsDragging] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
   const canvasPositionRef = useRef({ top: 0, left: 0, width: 0, height: 0 });
+  const location = useLocation();
 
   const fontFamilies = [
     { value: "Impact", label: "Impact" },
@@ -127,6 +128,24 @@ const MemeEditor = () => {
       name: 'Distracted Boyfriend'
     }
   ];
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const templateParam = searchParams.get('template');
+    
+    if (templateParam) {
+      setImageLoading(true);
+      
+      if (!isNaN(Number(templateParam)) && Number(templateParam) > 0 && Number(templateParam) <= templateImages.length) {
+        const index = Number(templateParam) - 1;
+        setImage(templateImages[index].url);
+      } else {
+        setImage(templateParam);
+      }
+      
+      setImageLoading(false);
+    }
+  }, [location]);
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -324,6 +343,12 @@ const MemeEditor = () => {
                     src={image} 
                     alt="Meme template" 
                     className="max-w-full w-full"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = 'https://placehold.co/600x400/lightgray/darkgray?text=Image+Loading+Failed';
+                      toast.error("Failed to load image");
+                    }}
                   />
                   {texts.map(text => (
                     <div
@@ -337,7 +362,9 @@ const MemeEditor = () => {
                         maxWidth: '90%',
                         padding: '0.25rem',
                         color: text.color,
-                        fontFamily: text.fontFamily
+                        fontFamily: text.fontFamily,
+                        textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000',
+                        userSelect: 'none'
                       }}
                       onClick={() => setSelectedTextId(text.id)}
                       onMouseDown={(e) => handleTextMouseDown(e, text.id)}
@@ -354,7 +381,7 @@ const MemeEditor = () => {
             <div className="mt-4 flex justify-center">
               <Button 
                 onClick={downloadMeme} 
-                className="bg-meme-purple hover:bg-meme-purple/90"
+                className="bg-blue-600 hover:bg-blue-700 text-white"
               >
                 <Download className="mr-2 h-4 w-4" /> Download Meme
               </Button>
@@ -393,6 +420,11 @@ const MemeEditor = () => {
                       src={template.url} 
                       alt={`${template.name} template`}
                       className="w-full h-auto object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = 'https://placehold.co/150x150/lightgray/darkgray?text=Failed';
+                      }}
                     />
                   </div>
                 ))}
@@ -476,7 +508,7 @@ const MemeEditor = () => {
                       <button
                         key={color}
                         type="button"
-                        className={`w-8 h-8 rounded-full border-2 ${selectedText.color === color ? 'border-meme-purple' : 'border-transparent'}`}
+                        className={`w-8 h-8 rounded-full border-2 ${selectedText.color === color ? 'border-blue-600' : 'border-transparent'}`}
                         style={{ backgroundColor: color }}
                         onClick={() => updateTextColor(color)}
                         aria-label={`Select color ${color}`}
