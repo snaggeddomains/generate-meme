@@ -7,68 +7,68 @@ import { Button } from "@/components/ui/button";
 const Templates = () => {
   const templates = [
     {
-      url: '/lovable-uploads/9581f077-87c7-4013-bd4b-72f8abb319a2.png',
-      name: 'Zac Efron Collage'
+      url: '/lovable-uploads/When Your Parents Ask Where All Your Money Went - Zac Efron, High School Musical 2.jpg',
+      name: 'Zac Efron Money'
     },
     {
-      url: '/lovable-uploads/869b7d2b-b158-479f-b61a-6dfcc59c1d0d.png',
+      url: '/lovable-uploads/Highway Exit - Guy Swerving Car.jpg',
       name: 'Highway Exit'
     },
     {
-      url: '/lovable-uploads/2433aa4e-ad2e-409f-bada-436ebb360bf7.png',
-      name: 'Kermit Mood'
+      url: '/lovable-uploads/Kermit Inner Me.jpg',
+      name: 'Kermit Inner Me'
     },
     {
-      url: '/lovable-uploads/04abb2c3-6a1e-4ded-85b7-3893eb48cb40.png',
+      url: '/lovable-uploads/Will Smith Slap.jpg',
       name: 'Will Smith Slap'
     },
     {
-      url: '/lovable-uploads/39dfe9a4-2ab1-438e-994c-2aa77e221057.png',
-      name: 'Shaq Surprise'
+      url: '/lovable-uploads/Shaq Hot Ones.jpg',
+      name: 'Shaq Hot Ones'
     },
     {
-      url: '/lovable-uploads/a5cbe67a-9047-45e3-b897-d8350ab6dfbe.png',
+      url: '/lovable-uploads/Liam Neeson Taken Phone Call.jpg',
       name: 'Taken Phone Call'
     },
     {
-      url: '/lovable-uploads/f8173864-427b-4ef1-ba7d-40455da56a9a.png',
-      name: 'John Cena'
+      url: '/lovable-uploads/John Cena Confused.jpg',
+      name: 'John Cena Confused'
     },
     {
-      url: '/lovable-uploads/984f5c84-9f42-4567-b531-43a9b13b8552.png',
+      url: '/lovable-uploads/Red Button Choice Panic.jpg',
       name: 'Red Button Choice'
     },
     {
-      url: '/lovable-uploads/31fd2421-f639-4e43-b494-a8deb2cc8ff3.png',
-      name: 'Spongebob Pointing'
+      url: '/lovable-uploads/Spongebob Mocking.jpg',
+      name: 'Spongebob Mocking'
     },
     {
-      url: '/lovable-uploads/f78d8307-89cc-4977-8b84-c0a367e46310.png',
+      url: '/lovable-uploads/Hide The Pain Harold.jpg',
       name: 'Hide The Pain Harold'
     },
     {
-      url: '/lovable-uploads/1608f8a5-891a-4d8c-b920-40bc4bd90b8a.png',
+      url: '/lovable-uploads/Matt Damon Aging.jpg',
       name: 'Matt Damon Aging'
     },
     {
-      url: '/lovable-uploads/10de5f8f-91e8-425c-b3b6-ab5165c0bb1a.png',
+      url: '/lovable-uploads/Predator Epic Handshake.jpg',
       name: 'Predator Handshake'
     },
     {
-      url: '/lovable-uploads/b91f569c-f7a4-4344-ba61-2b8b0c5ed7ec.png',
+      url: '/lovable-uploads/The Office Handshake.jpg',
       name: 'The Office Handshake'
     },
     {
-      url: '/lovable-uploads/818c33f7-5db2-4c8d-8680-7d5cf176a587.png',
+      url: '/lovable-uploads/Dave Chappelle.jpg',
       name: 'Dave Chappelle'
     },
     {
-      url: '/lovable-uploads/afdb1e53-36b2-4184-84c9-b45269fa6eeb.png',
-      name: 'Money Sleep'
+      url: '/lovable-uploads/Drake Hotline Bling.jpg',
+      name: 'Drake Hotline Bling'
     },
     {
-      url: '/lovable-uploads/26cc6e99-ac06-4ec7-97ce-afd2c9f09c0f.png',
-      name: 'Decision Buttons'
+      url: '/lovable-uploads/Distracted Boyfriend.jpg',
+      name: 'Distracted Boyfriend'
     }
   ];
 

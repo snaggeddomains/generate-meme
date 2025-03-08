@@ -31,27 +31,27 @@ const Index = () => {
 
   const popularTemplates = [
     {
-      url: '/lovable-uploads/9581f077-87c7-4013-bd4b-72f8abb319a2.png',
-      name: 'Zac Efron Collage'
+      url: '/lovable-uploads/When Your Parents Ask Where All Your Money Went - Zac Efron, High School Musical 2.jpg',
+      name: 'Zac Efron Money'
     },
     {
-      url: '/lovable-uploads/869b7d2b-b158-479f-b61a-6dfcc59c1d0d.png',
+      url: '/lovable-uploads/Highway Exit - Guy Swerving Car.jpg',
       name: 'Highway Exit'
     },
     {
-      url: '/lovable-uploads/2433aa4e-ad2e-409f-bada-436ebb360bf7.png',
-      name: 'Kermit Mood'
+      url: '/lovable-uploads/Kermit Inner Me.jpg',
+      name: 'Kermit Inner Me'
     },
     {
-      url: '/lovable-uploads/04abb2c3-6a1e-4ded-85b7-3893eb48cb40.png',
+      url: '/lovable-uploads/Will Smith Slap.jpg',
       name: 'Will Smith Slap'
     },
     {
-      url: '/lovable-uploads/39dfe9a4-2ab1-438e-994c-2aa77e221057.png',
-      name: 'Shaq Surprise'
+      url: '/lovable-uploads/Shaq Hot Ones.jpg',
+      name: 'Shaq Hot Ones'
     },
     {
-      url: '/lovable-uploads/f78d8307-89cc-4977-8b84-c0a367e46310.png',
+      url: '/lovable-uploads/Hide The Pain Harold.jpg',
       name: 'Hide The Pain Harold'
     }
   ];
