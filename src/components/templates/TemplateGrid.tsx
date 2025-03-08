@@ -23,7 +23,8 @@ const TemplateGrid = ({ templates }: TemplateGridProps) => {
         successfullyLoadedImages.has(template.url)
       );
       if (loaded.length > 0) {
-        setFilteredTemplates(loaded);
+        // Only take the top 11 templates that have successfully loaded
+        setFilteredTemplates(loaded.slice(0, 11));
       }
     }, 1500);
     
