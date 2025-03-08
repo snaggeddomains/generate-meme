@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
@@ -28,30 +29,19 @@ const Index = () => {
     }
   ];
 
+  // Using the same three templates as in Templates.tsx
   const popularTemplates = [
     {
-      url: '/lovable-uploads/9581f077-87c7-4013-bd4b-72f8abb319a2.png',
-      name: 'Zac Efron Money'
+      url: '/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png',
+      name: 'Highway Exit Meme'
     },
     {
-      url: '/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png',
-      name: 'Highway Exit'
+      url: '/lovable-uploads/4ef6ba1e-ea94-40f5-a331-df2b2ac04bac.png',
+      name: 'Kermit Meme'
     },
     {
-      url: '/placeholder.svg',
-      name: 'Kermit Inner Me'
-    },
-    {
-      url: '/placeholder.svg',
+      url: '/lovable-uploads/b1cb09a7-9e13-46dd-8b5f-7e50d501f949.png',
       name: 'Will Smith Slap'
-    },
-    {
-      url: '/placeholder.svg',
-      name: 'Shaq Hot Ones'
-    },
-    {
-      url: '/placeholder.svg',
-      name: 'Hide The Pain Harold'
     }
   ];
 
@@ -89,17 +79,25 @@ const Index = () => {
                 <div className="absolute -top-4 -left-4 w-full h-full rounded-lg bg-orange-400 opacity-20 animate-bounce-slow"></div>
                 <div className="relative overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-xl">
                   <img
-                    src="/lovable-uploads/9581f077-87c7-4013-bd4b-72f8abb319a2.png"
+                    src="/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png"
                     alt="Meme example"
                     className="w-full h-auto"
                   />
                   <div className="absolute top-4 left-0 right-0 text-center">
-                    <p className="meme-text" style={{ fontSize: "28px" }}>
+                    <p className="meme-text" style={{ 
+                      fontSize: "28px", 
+                      color: "white", 
+                      textShadow: "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000" 
+                    }}>
                       WHEN YOU FINALLY FIND
                     </p>
                   </div>
                   <div className="absolute bottom-4 left-0 right-0 text-center">
-                    <p className="meme-text" style={{ fontSize: "28px" }}>
+                    <p className="meme-text" style={{ 
+                      fontSize: "28px", 
+                      color: "white", 
+                      textShadow: "2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000" 
+                    }}>
                       THE PERFECT MEME GENERATOR
                     </p>
                   </div>
@@ -143,21 +141,26 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {popularTemplates.map((template, index) => (
               <Link 
                 key={index} 
-                to={`/create?template=${index + 1}`}
+                to={`/create?template=${encodeURIComponent(template.url)}`}
                 className="block rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
               >
-                <div className="overflow-hidden">
+                <div className="overflow-hidden aspect-video">
                   <img 
                     src={template.url} 
                     alt={`${template.name} template`}
-                    className="w-full h-auto transition-transform hover:scale-105 duration-300"
+                    className="w-full h-full object-contain transition-transform hover:scale-105 duration-300"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = 'https://placehold.co/400x300/lightgray/darkgray?text=Loading+Failed';
+                    }}
                   />
                 </div>
-                <div className="p-2 text-center text-sm font-medium">
+                <div className="p-3 text-center font-medium">
                   {template.name}
                 </div>
               </Link>

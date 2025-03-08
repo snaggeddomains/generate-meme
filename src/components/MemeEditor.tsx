@@ -64,68 +64,16 @@ const MemeEditor = () => {
 
   const templateImages = [
     {
-      url: '/lovable-uploads/When Your Parents Ask Where All Your Money Went - Zac Efron, High School Musical 2.jpg',
-      name: 'Zac Efron Money'
+      url: '/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png',
+      name: 'Highway Exit Meme'
     },
     {
-      url: '/lovable-uploads/Highway Exit - Guy Swerving Car.jpg',
-      name: 'Highway Exit'
+      url: '/lovable-uploads/4ef6ba1e-ea94-40f5-a331-df2b2ac04bac.png',
+      name: 'Kermit Meme'
     },
     {
-      url: '/lovable-uploads/Kermit Inner Me.jpg',
-      name: 'Kermit Inner Me'
-    },
-    {
-      url: '/lovable-uploads/Will Smith Slap.jpg',
+      url: '/lovable-uploads/b1cb09a7-9e13-46dd-8b5f-7e50d501f949.png',
       name: 'Will Smith Slap'
-    },
-    {
-      url: '/lovable-uploads/Shaq Hot Ones.jpg',
-      name: 'Shaq Hot Ones'
-    },
-    {
-      url: '/lovable-uploads/Liam Neeson Taken Phone Call.jpg',
-      name: 'Taken Phone Call'
-    },
-    {
-      url: '/lovable-uploads/John Cena Confused.jpg',
-      name: 'John Cena Confused'
-    },
-    {
-      url: '/lovable-uploads/Red Button Choice Panic.jpg',
-      name: 'Red Button Choice'
-    },
-    {
-      url: '/lovable-uploads/Spongebob Mocking.jpg',
-      name: 'Spongebob Mocking'
-    },
-    {
-      url: '/lovable-uploads/Hide The Pain Harold.jpg',
-      name: 'Hide The Pain Harold'
-    },
-    {
-      url: '/lovable-uploads/Matt Damon Aging.jpg',
-      name: 'Matt Damon Aging'
-    },
-    {
-      url: '/lovable-uploads/Predator Epic Handshake.jpg',
-      name: 'Predator Handshake'
-    },
-    {
-      url: '/lovable-uploads/The Office Handshake.jpg',
-      name: 'The Office Handshake'
-    },
-    {
-      url: '/lovable-uploads/Dave Chappelle.jpg',
-      name: 'Dave Chappelle'
-    },
-    {
-      url: '/lovable-uploads/Drake Hotline Bling.jpg',
-      name: 'Drake Hotline Bling'
-    },
-    {
-      url: '/lovable-uploads/Distracted Boyfriend.jpg',
-      name: 'Distracted Boyfriend'
     }
   ];
 
@@ -293,6 +241,7 @@ const MemeEditor = () => {
     setImageLoading(true);
     setImage(templateUrl);
     setImageLoading(false);
+    toast.success("Template loaded successfully");
   };
 
   const selectedText = selectedTextId 
@@ -409,7 +358,7 @@ const MemeEditor = () => {
             
             <div>
               <Label className="block mb-2">Quick Templates</Label>
-              <div className="grid grid-cols-3 gap-2 max-h-[360px] overflow-y-auto pr-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-[360px] overflow-y-auto pr-1">
                 {templateImages.map((template, index) => (
                   <div 
                     key={index}
@@ -424,8 +373,12 @@ const MemeEditor = () => {
                         const target = e.target as HTMLImageElement;
                         target.onerror = null;
                         target.src = 'https://placehold.co/150x150/lightgray/darkgray?text=Failed';
+                        toast.error(`Failed to load ${template.name}`);
                       }}
                     />
+                    <div className="p-1 text-center text-xs">
+                      {template.name}
+                    </div>
                   </div>
                 ))}
               </div>
