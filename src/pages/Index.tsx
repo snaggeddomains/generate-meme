@@ -31,29 +31,29 @@ const Index = () => {
 
   const popularTemplates = [
     {
-      url: 'https://i.imgur.com/HbI8rm7.jpg',
-      name: 'Drake Hotline'
+      url: '/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png',
+      name: 'Buff Doge vs Cheems'
     },
     {
-      url: 'https://i.imgur.com/rF42gFp.jpg',
-      name: 'Two Buttons'
+      url: '/lovable-uploads/25cb8922-dd81-4a4b-8d8b-8597c18a33e7.png',
+      name: 'Its a Trap'
     },
     {
-      url: 'https://i.imgur.com/c0YoAdG.jpg',
-      name: 'Distracted BF'
+      url: '/lovable-uploads/f97eb470-37ac-4d5a-aa93-6f35513c0f9c.png',
+      name: 'Every Day We Stray'
     },
     {
-      url: 'https://i.imgur.com/dE5C9yI.jpg',
-      name: 'Running Away'
+      url: '/lovable-uploads/a47b5d6c-5e5c-4aaa-9ff9-ceeb54755ecf.png',
+      name: 'Twin Reaction'
     },
     {
-      url: 'https://i.imgur.com/ZoZKFhe.jpg',
-      name: 'UNO Draw 25'
+      url: '/lovable-uploads/2728caa6-6184-4bf9-b511-657f438f9850.png',
+      name: 'Minecraft Furnace'
     },
     {
-      url: 'https://i.imgur.com/2heNUdr.jpg',
-      name: 'Buff Doge'
-    },
+      url: '/lovable-uploads/7e2728c3-7eb2-4adf-9ee7-426be67f99a6.png',
+      name: 'Simpson Sign'
+    }
   ];
 
   return (
@@ -90,7 +90,7 @@ const Index = () => {
                 <div className="absolute -top-4 -left-4 w-full h-full rounded-lg bg-orange-400 opacity-20 animate-bounce-slow"></div>
                 <div className="relative overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-xl">
                   <img
-                    src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-4.0.3&auto=format&fit=crop&w=540&h=400&q=80"
+                    src="/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png"
                     alt="Meme example"
                     className="w-full h-auto"
                   />
