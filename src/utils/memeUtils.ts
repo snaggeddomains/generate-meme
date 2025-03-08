@@ -24,6 +24,22 @@ export const templateImages = [
     name: 'Will Smith Slap'
   },
   {
+    url: '/lovable-uploads/02d162d5-0051-4e01-9453-f84dac7b779b.png',
+    name: 'Roll Safe Meme'
+  },
+  {
+    url: '/lovable-uploads/98151edf-a71a-498e-bead-59b67030ea29.png',
+    name: 'Blinking Guy Meme'
+  },
+  {
+    url: '/lovable-uploads/83f2a199-b47b-4fee-ad80-1e1579f43bc1.png',
+    name: 'Epic Handshake'
+  },
+  {
+    url: '/lovable-uploads/90de871d-b892-4cc1-a2ef-45cb71a5af6d.png',
+    name: 'Change My Mind'
+  },
+  {
     url: convertGoogleDriveUrl('https://drive.google.com/file/d/1pFKi6tTj_YP_6Izn5Vp_eE6b4t15YZUQ/view?usp=drive_link'),
     name: 'Drake Meme'
   }

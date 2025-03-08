@@ -11,24 +11,28 @@ export const extractGoogleDriveFolderContents = async () => {
   try {
     return [
       {
-        id: "1pFKi6tTj_YP_6Izn5Vp_eE6b4t15YZUQ",
-        name: "Drake Meme"
+        id: "local-1",
+        name: "Roll Safe Meme",
+        url: "/lovable-uploads/02d162d5-0051-4e01-9453-f84dac7b779b.png"
       },
       {
-        id: "14JA_2aGRKUCM5Zg4F8Wzep_B-xvTmPj9",
-        name: "Distracted Boyfriend"
+        id: "local-2",
+        name: "Blinking Guy Meme",
+        url: "/lovable-uploads/98151edf-a71a-498e-bead-59b67030ea29.png"
       },
       {
-        id: "1gIL-ajAbBS12K_9fToVqQJd33XNNQxwF",
-        name: "Change My Mind"
+        id: "local-3",
+        name: "Epic Handshake",
+        url: "/lovable-uploads/83f2a199-b47b-4fee-ad80-1e1579f43bc1.png"
       },
       {
-        id: "10BPp-P2ZTvZH5r8GWbCXnHuUPr8RJAke",
-        name: "Two Buttons"
+        id: "local-4",
+        name: "Change My Mind",
+        url: "/lovable-uploads/90de871d-b892-4cc1-a2ef-45cb71a5af6d.png"
       }
     ];
   } catch (error) {
-    console.error("Error fetching Google Drive folder contents:", error);
+    console.error("Error fetching template contents:", error);
     return [];
   }
 };

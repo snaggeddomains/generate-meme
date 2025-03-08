@@ -11,22 +11,20 @@ const Templates = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchDriveFolderContents = async () => {
+    const fetchTemplates = async () => {
       setIsLoading(true);
       try {
-        const folderUrl = "https://drive.google.com/drive/folders/1MWU09Gq7ux87a8qg8S3BnfbIEn1WV_ys?usp=sharing";
-        const folderContents = await extractGoogleDriveFolderContents();
+        const templateContents = await extractGoogleDriveFolderContents();
         
-        // Add the Google Drive folder images to templates
-        if (folderContents.length > 0) {
-          const driveTemplates = folderContents.map(item => ({
-            url: `https://drive.google.com/uc?export=view&id=${item.id}`,
+        if (templateContents.length > 0) {
+          const localTemplates = templateContents.map(item => ({
+            url: item.url || `/lovable-uploads/${item.id}.png`,
             name: item.name,
             fallback: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6' // Default fallback
           }));
           
-          setTemplates(driveTemplates);
-          toast.success(`Loaded ${driveTemplates.length} templates from Google Drive`);
+          setTemplates(localTemplates);
+          toast.success(`Loaded ${localTemplates.length} templates`);
         }
       } catch (error) {
         console.error("Error fetching templates:", error);
@@ -36,7 +34,7 @@ const Templates = () => {
       }
     };
     
-    fetchDriveFolderContents();
+    fetchTemplates();
   }, []);
 
   return (
