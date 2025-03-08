@@ -39,9 +39,63 @@ export const templateImages = [
     url: '/lovable-uploads/90de871d-b892-4cc1-a2ef-45cb71a5af6d.png',
     name: 'Change My Mind'
   },
+  // New templates
   {
-    url: convertGoogleDriveUrl('https://drive.google.com/file/d/1pFKi6tTj_YP_6Izn5Vp_eE6b4t15YZUQ/view?usp=drive_link'),
-    name: 'Drake Meme'
+    url: '/lovable-uploads/33899fa4-54a0-4a2e-b9bd-b9d1637efab8.png',
+    name: 'Distracted Boyfriend'
+  },
+  {
+    url: '/lovable-uploads/3d7c1eab-db2a-425d-abee-5d1d48d90f4e.png',
+    name: 'Two Buttons'
+  },
+  {
+    url: '/lovable-uploads/9f0f411b-dbae-4537-a742-cfac0f1c4b75.png',
+    name: 'Expanding Brain'
+  },
+  {
+    url: '/lovable-uploads/0bc20a0c-cc2e-45f7-a256-64a156fb3d04.png',
+    name: 'Drake Hotline Bling'
+  },
+  {
+    url: '/lovable-uploads/b730e20c-f36c-4a2d-a1f6-dc78a6232fc2.png',
+    name: 'Buff Doge vs Cheems'
+  },
+  {
+    url: '/lovable-uploads/f6961b06-0572-4d3c-a647-d7fdacb9a5df.png',
+    name: 'Always Has Been'
+  },
+  {
+    url: '/lovable-uploads/dca06f66-5f29-43ed-9e68-1ce3e382ac56.png',
+    name: 'Gru Plan'
+  },
+  // Adding the last batch of images
+  {
+    url: '/lovable-uploads/slap.png',
+    name: 'Will Smith Slap'
+  },
+  {
+    url: '/lovable-uploads/zac-efron.png',
+    name: 'Zac Efron Shrugging'
+  },
+  {
+    url: '/lovable-uploads/office-handshake.png',
+    name: 'Office Handshake'
+  },
+  {
+    url: '/lovable-uploads/crying-man.png',
+    name: 'Crying Man'
+  },
+  {
+    url: '/lovable-uploads/shaq.png',
+    name: 'Shocked Shaq'
+  },
+  {
+    url: '/lovable-uploads/spiderman-pointing.png',
+    name: 'Spiderman Pointing'
+  },
+  {
+    url: '/lovable-uploads/matt-damon-aging.png',
+    name: 'Matt Damon Aging'
   }
 ];
 
