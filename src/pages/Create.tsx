@@ -2,8 +2,15 @@
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import MemeEditor from "@/components/MemeEditor";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 const Create = () => {
+  useEffect(() => {
+    // You could add a check here to validate templates if needed
+    toast.info("Ready to create your meme!", { duration: 2000 });
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <NavBar />

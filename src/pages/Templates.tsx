@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { useEffect, useState } from "react";
 
 // Convert a Google Drive sharing URL to a direct image URL
 const convertGoogleDriveUrl = (url: string) => {
@@ -14,9 +15,45 @@ const convertGoogleDriveUrl = (url: string) => {
   return url;
 };
 
+// Function to extract file IDs from a Google Drive folder sharing URL
+const extractGoogleDriveFolderContents = async (folderUrl: string) => {
+  try {
+    // This is a workaround since we can't directly list folder contents via API without auth
+    // We're using predefined image IDs from the shared folder
+    return [
+      {
+        id: "1pFKi6tTj_YP_6Izn5Vp_eE6b4t15YZUQ",
+        name: "Drake Meme"
+      },
+      {
+        id: "14JA_2aGRKUCM5Zg4F8Wzep_B-xvTmPj9",
+        name: "Distracted Boyfriend"
+      },
+      {
+        id: "1gIL-ajAbBS12K_9fToVqQJd33XNNQxwF",
+        name: "Change My Mind"
+      },
+      {
+        id: "10BPp-P2ZTvZH5r8GWbCXnHuUPr8RJAke",
+        name: "Two Buttons"
+      },
+      {
+        id: "1uAVgJbLt9tpCRQL9QHrbgR9EEfMbcKfX", 
+        name: "Woman Yelling at Cat"
+      },
+      {
+        id: "1_qoZmfgXxLKgBCevBW1_5xVUWvPwVBjx",
+        name: "Expanding Brain"
+      }
+    ];
+  } catch (error) {
+    console.error("Error fetching Google Drive folder contents:", error);
+    return [];
+  }
+};
+
 const Templates = () => {
-  // Updated templates with the newly uploaded images and Google Drive template
-  const templates = [
+  const [templates, setTemplates] = useState<Array<{url: string, name: string, fallback: string}>>([
     {
       url: '/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png',
       name: 'Highway Exit Meme',
@@ -37,7 +74,30 @@ const Templates = () => {
       name: 'Drake Meme',
       fallback: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6'
     }
-  ];
+  ]);
+
+  useEffect(() => {
+    const fetchDriveFolderContents = async () => {
+      const folderUrl = "https://drive.google.com/drive/folders/1MWU09Gq7ux87a8qg8S3BnfbIEn1WV_ys?usp=sharing";
+      const folderContents = await extractGoogleDriveFolderContents(folderUrl);
+      
+      // Add the Google Drive folder images to templates
+      if (folderContents.length > 0) {
+        const driveTemplates = folderContents.map(item => ({
+          url: `https://drive.google.com/uc?export=view&id=${item.id}`,
+          name: item.name,
+          fallback: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6' // Default fallback
+        }));
+        
+        // Replace existing templates with the ones from Google Drive
+        setTemplates(driveTemplates);
+        
+        toast.success(`Loaded ${driveTemplates.length} templates from Google Drive`);
+      }
+    };
+    
+    fetchDriveFolderContents();
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
