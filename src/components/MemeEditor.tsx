@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -125,6 +126,34 @@ const MemeEditor = () => {
     ? texts.find(t => t.id === selectedTextId) 
     : null;
 
+  // Updated template images that are more fun/interesting
+  const templateImages = [
+    {
+      url: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
+      name: 'Matrix Code'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
+      name: 'Robot'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
+      name: 'Light Bulb'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
+      name: 'Foggy Mountain'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
+      name: 'Ocean Wave'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
+      name: 'Sleepy Cat'
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div className="lg:col-span-2 flex flex-col space-y-4">
@@ -167,7 +196,7 @@ const MemeEditor = () => {
                   <img 
                     src={image} 
                     alt="Meme template" 
-                    className="max-w-full"
+                    className="max-w-full w-full"
                   />
                   {texts.map(text => (
                     <div
@@ -224,41 +253,16 @@ const MemeEditor = () => {
             <div>
               <Label className="block mb-2">Quick Templates</Label>
               <div className="grid grid-cols-3 gap-2">
-                {[
-                  {
-                    url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
-                    name: 'Coding'
-                  },
-                  {
-                    url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
-                    name: 'Laptop'
-                  },
-                  {
-                    url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
-                    name: 'Circuit'
-                  },
-                  {
-                    url: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
-                    name: 'Remote Work'
-                  },
-                  {
-                    url: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
-                    name: 'MacBook'
-                  },
-                  {
-                    url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
-                    name: 'Work Setup'
-                  },
-                ].map((template, index) => (
+                {templateImages.map((template, index) => (
                   <div 
                     key={index}
-                    className="aspect-square bg-muted rounded-md overflow-hidden cursor-pointer hover:ring-2 hover:ring-primary"
+                    className="overflow-hidden rounded-md cursor-pointer hover:ring-2 hover:ring-primary"
                     onClick={() => useTemplateImage(template.url)}
                   >
                     <img 
                       src={template.url} 
                       alt={`${template.name} template`}
-                      className="w-full h-full object-cover"
+                      className="w-full h-auto object-cover"
                     />
                   </div>
                 ))}

@@ -101,6 +101,9 @@
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .meme-text {

@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
@@ -27,6 +26,33 @@ const Index = () => {
       title: "Stay Trending",
       description: "Access the latest meme templates and stay ahead of trends"
     }
+  ];
+
+  const popularTemplates = [
+    {
+      url: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
+      name: 'Matrix Code'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
+      name: 'Robot'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
+      name: 'Light Bulb'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
+      name: 'Foggy Mountain'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
+      name: 'Ocean Wave'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
+      name: 'Sleepy Cat'
+    },
   ];
 
   return (
@@ -62,7 +88,7 @@ const Index = () => {
                 <div className="absolute -top-4 -left-4 w-full h-full rounded-lg bg-meme-pink opacity-20 animate-bounce-slow"></div>
                 <div className="relative overflow-hidden rounded-lg bg-white shadow-xl">
                   <img
-                    src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=540&h=400&q=80"
+                    src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=540&h=400&q=80"
                     alt="Meme example"
                     className="w-full h-auto"
                   />
@@ -116,42 +142,17 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[
-              {
-                url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80',
-                name: 'Coding'
-              },
-              {
-                url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80',
-                name: 'Laptop'
-              },
-              {
-                url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80',
-                name: 'Circuit'
-              },
-              {
-                url: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80',
-                name: 'Remote Work'
-              },
-              {
-                url: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80',
-                name: 'MacBook'
-              },
-              {
-                url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80',
-                name: 'Work Setup'
-              }
-            ].map((template, index) => (
+            {popularTemplates.map((template, index) => (
               <Link 
                 key={index} 
                 to={`/create?template=${index + 1}`}
                 className="block rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white dark:bg-card"
               >
-                <div className="aspect-square overflow-hidden">
+                <div className="overflow-hidden">
                   <img
                     src={template.url}
                     alt={`${template.name} template`}
-                    className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+                    className="w-full h-auto transition-transform hover:scale-105 duration-300"
                   />
                 </div>
                 <div className="p-2 text-center text-sm font-medium">
