@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 const Templates = () => {
-  // Using only the three new meme templates
+  // Updated URLs to ensure all images load properly
   const templates = [
     {
       url: '/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png',
@@ -44,8 +44,10 @@ const Templates = () => {
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
-                    target.src = 'https://placehold.co/400x400/lightgray/darkgray?text=Loading+Failed';
+                    // Fallback to placeholder image
+                    target.src = '/placeholder.svg';
                     toast.error(`Failed to load ${template.name}`);
+                    console.error(`Failed to load image: ${template.url}`);
                   }}
                 />
               </div>

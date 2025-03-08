@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { ArrowRight, Smile, Share2, Download, TrendingUp } from "lucide-react";
+import { toast } from "sonner";
 
 const Index = () => {
   const features = [
@@ -29,7 +30,7 @@ const Index = () => {
     }
   ];
 
-  // Using the same three templates as in Templates.tsx
+  // Using the same template URLs as in Templates.tsx
   const popularTemplates = [
     {
       url: '/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png',
@@ -82,6 +83,12 @@ const Index = () => {
                     src="/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png"
                     alt="Meme example"
                     className="w-full h-auto"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = '/placeholder.svg';
+                      console.error("Failed to load hero image");
+                    }}
                   />
                   <div className="absolute top-4 left-0 right-0 text-center">
                     <p className="meme-text" style={{ 
@@ -156,7 +163,9 @@ const Index = () => {
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.onerror = null;
-                      target.src = 'https://placehold.co/400x300/lightgray/darkgray?text=Loading+Failed';
+                      target.src = '/placeholder.svg';
+                      toast.error(`Failed to load ${template.name}`);
+                      console.error(`Failed to load image: ${template.url}`);
                     }}
                   />
                 </div>
