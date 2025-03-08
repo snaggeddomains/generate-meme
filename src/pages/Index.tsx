@@ -62,7 +62,7 @@ const Index = () => {
                 <div className="absolute -top-4 -left-4 w-full h-full rounded-lg bg-meme-pink opacity-20 animate-bounce-slow"></div>
                 <div className="relative overflow-hidden rounded-lg bg-white shadow-xl">
                   <img
-                    src="https://placekitten.com/540/400"
+                    src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=540&h=400&q=80"
                     alt="Meme example"
                     className="w-full h-auto"
                   />
@@ -116,7 +116,32 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[1, 2, 3, 4, 5, 6].map((_, index) => (
+            {[
+              {
+                url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80',
+                name: 'Coding'
+              },
+              {
+                url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80',
+                name: 'Laptop'
+              },
+              {
+                url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80',
+                name: 'Circuit'
+              },
+              {
+                url: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80',
+                name: 'Remote Work'
+              },
+              {
+                url: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80',
+                name: 'MacBook'
+              },
+              {
+                url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80',
+                name: 'Work Setup'
+              }
+            ].map((template, index) => (
               <Link 
                 key={index} 
                 to={`/create?template=${index + 1}`}
@@ -124,13 +149,13 @@ const Index = () => {
               >
                 <div className="aspect-square overflow-hidden">
                   <img
-                    src={`https://placekitten.com/300/${300 + index}`}
-                    alt={`Template ${index + 1}`}
+                    src={template.url}
+                    alt={`${template.name} template`}
                     className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
                   />
                 </div>
                 <div className="p-2 text-center text-sm font-medium">
-                  Template {index + 1}
+                  {template.name}
                 </div>
               </Link>
             ))}

@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,7 +33,6 @@ const MemeEditor = () => {
   const [imageLoading, setImageLoading] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
 
-  // Function to handle file upload
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -48,7 +46,6 @@ const MemeEditor = () => {
     reader.readAsDataURL(file);
   };
 
-  // Function to add new text
   const addNewText = () => {
     const newId = `text-${Date.now()}`;
     const newText: MemeText = {
@@ -63,7 +60,6 @@ const MemeEditor = () => {
     toast.success("New text added!");
   };
 
-  // Function to remove selected text
   const removeSelectedText = () => {
     if (!selectedTextId || texts.length <= 1) return;
     
@@ -72,7 +68,6 @@ const MemeEditor = () => {
     toast.success("Text removed!");
   };
 
-  // Update text content
   const updateTextContent = (value: string) => {
     if (!selectedTextId) return;
     
@@ -81,7 +76,6 @@ const MemeEditor = () => {
     ));
   };
 
-  // Update text position vertically
   const moveTextVertically = (direction: 'up' | 'down') => {
     if (!selectedTextId) return;
     
@@ -96,7 +90,6 @@ const MemeEditor = () => {
     }));
   };
 
-  // Update text size
   const updateTextSize = (value: number[]) => {
     if (!selectedTextId) return;
     
@@ -105,11 +98,9 @@ const MemeEditor = () => {
     ));
   };
 
-  // Function to download meme
   const downloadMeme = () => {
     if (!canvasRef.current) return;
     
-    // Use html2canvas to capture the meme
     import('html2canvas').then(({ default: html2canvas }) => {
       html2canvas(canvasRef.current!).then(canvas => {
         const link = document.createElement('a');
@@ -124,21 +115,18 @@ const MemeEditor = () => {
     });
   };
 
-  // Function to use a template image
   const useTemplateImage = (templateUrl: string) => {
     setImageLoading(true);
     setImage(templateUrl);
     setImageLoading(false);
   };
 
-  // Get selected text
   const selectedText = selectedTextId 
     ? texts.find(t => t.id === selectedTextId) 
     : null;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      {/* Meme Canvas */}
       <div className="lg:col-span-2 flex flex-col space-y-4">
         <div className="bg-white dark:bg-card rounded-lg p-6 shadow-md">
           <h2 className="text-xl font-bold mb-4">Meme Preview</h2>
@@ -216,9 +204,7 @@ const MemeEditor = () => {
         </div>
       </div>
       
-      {/* Controls */}
       <div className="space-y-6">
-        {/* Image controls */}
         <div className="bg-white dark:bg-card rounded-lg p-6 shadow-md">
           <h3 className="text-lg font-bold mb-4 flex items-center">
             <ImageIcon className="mr-2 h-5 w-5" /> Image
@@ -239,21 +225,39 @@ const MemeEditor = () => {
               <Label className="block mb-2">Quick Templates</Label>
               <div className="grid grid-cols-3 gap-2">
                 {[
-                  '/template-drake.jpg',
-                  '/template-distracted.jpg',
-                  '/template-change-mind.jpg',
-                  '/template-button.jpg',
-                  '/template-fine.jpg',
-                  '/template-doge.jpg',
+                  {
+                    url: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+                    name: 'Coding'
+                  },
+                  {
+                    url: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+                    name: 'Laptop'
+                  },
+                  {
+                    url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+                    name: 'Circuit'
+                  },
+                  {
+                    url: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+                    name: 'Remote Work'
+                  },
+                  {
+                    url: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+                    name: 'MacBook'
+                  },
+                  {
+                    url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80',
+                    name: 'Work Setup'
+                  },
                 ].map((template, index) => (
                   <div 
                     key={index}
                     className="aspect-square bg-muted rounded-md overflow-hidden cursor-pointer hover:ring-2 hover:ring-primary"
-                    onClick={() => useTemplateImage(`https://placekitten.com/400/${300 + index}`)}
+                    onClick={() => useTemplateImage(template.url)}
                   >
                     <img 
-                      src={`https://placekitten.com/400/${300 + index}`} 
-                      alt={`Template ${index + 1}`}
+                      src={template.url} 
+                      alt={`${template.name} template`}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -263,7 +267,6 @@ const MemeEditor = () => {
           </div>
         </div>
         
-        {/* Text controls */}
         <div className="bg-white dark:bg-card rounded-lg p-6 shadow-md">
           <h3 className="text-lg font-bold mb-4 flex items-center">
             <Type className="mr-2 h-5 w-5" /> Text
