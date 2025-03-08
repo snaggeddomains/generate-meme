@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -63,124 +62,68 @@ const MemeEditor = () => {
 
   const templateImages = [
     {
-      url: '/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png',
-      name: 'Buff Doge vs Cheems'
+      url: '/lovable-uploads/9581f077-87c7-4013-bd4b-72f8abb319a2.png',
+      name: 'Zac Efron Collage'
     },
     {
-      url: '/lovable-uploads/25cb8922-dd81-4a4b-8d8b-8597c18a33e7.png',
-      name: 'Its a Trap'
+      url: '/lovable-uploads/869b7d2b-b158-479f-b61a-6dfcc59c1d0d.png',
+      name: 'Highway Exit'
     },
     {
-      url: '/lovable-uploads/f97eb470-37ac-4d5a-aa93-6f35513c0f9c.png',
-      name: 'Every Day We Stray'
+      url: '/lovable-uploads/2433aa4e-ad2e-409f-bada-436ebb360bf7.png',
+      name: 'Kermit Mood'
     },
     {
-      url: '/lovable-uploads/a47b5d6c-5e5c-4aaa-9ff9-ceeb54755ecf.png',
-      name: 'Twin Reaction'
-    },
-    {
-      url: '/lovable-uploads/2728caa6-6184-4bf9-b511-657f438f9850.png',
-      name: 'Minecraft Furnace'
-    },
-    {
-      url: '/lovable-uploads/7e2728c3-7eb2-4adf-9ee7-426be67f99a6.png',
-      name: 'Simpson Sign'
-    },
-    {
-      url: '/lovable-uploads/b7847934-a4fa-4900-848d-b7e00b7d3710.png',
-      name: 'Winnie the Pooh'
-    },
-    {
-      url: '/lovable-uploads/c1af50a6-23ed-481b-bb80-60e10ce92bd9.png',
-      name: 'Community Pizza'
-    },
-    {
-      url: '/lovable-uploads/64e1c847-1b60-432a-ab93-5a92216be82a.png',
-      name: 'Three Wolves'
-    },
-    {
-      url: '/lovable-uploads/5f581a1d-b606-4091-864c-fe02c5ae8b27.png',
-      name: 'Gossip Children'
-    },
-    {
-      url: '/lovable-uploads/5de627b8-4aa8-4b3e-8969-eb50a910d367.png',
-      name: 'Gumball Face'
-    },
-    {
-      url: '/lovable-uploads/7b9c64d5-ca3b-4c7d-a4bd-4f4caefe7fb5.png',
-      name: 'Nebula Weak'
-    },
-    {
-      url: '/lovable-uploads/d29ff828-af7d-4617-9309-62af658d9fcb.png',
-      name: 'Battlefield Comic'
-    },
-    {
-      url: '/lovable-uploads/858e12af-6e1a-4551-a483-aa877637ff96.png',
-      name: 'Captain Hook'
-    },
-    {
-      url: '/lovable-uploads/c81af325-2cf5-4eea-8fa8-4c6dda0e6f00.png',
+      url: '/lovable-uploads/04abb2c3-6a1e-4ded-85b7-3893eb48cb40.png',
       name: 'Will Smith Slap'
     },
     {
-      url: '/lovable-uploads/23010d12-13a9-4827-8202-8943107f71a0.png',
-      name: 'Wojak Comic'
+      url: '/lovable-uploads/39dfe9a4-2ab1-438e-994c-2aa77e221057.png',
+      name: 'Shaq Surprise'
     },
     {
-      url: '/lovable-uploads/c469e706-55b3-4d16-bee5-93a800f39094.png',
-      name: 'Distracted Cat'
+      url: '/lovable-uploads/a5cbe67a-9047-45e3-b897-d8350ab6dfbe.png',
+      name: 'Taken Phone Call'
     },
     {
-      url: '/lovable-uploads/a0fb2f8c-ce73-4c2d-bc3c-de7a48bdaa95.png',
-      name: 'No Opinion Gun'
+      url: '/lovable-uploads/f8173864-427b-4ef1-ba7d-40455da56a9a.png',
+      name: 'John Cena'
     },
     {
-      url: '/lovable-uploads/4df8d505-b6a1-455e-89a3-ca89a4d719b6.png',
-      name: 'Matrix Man'
+      url: '/lovable-uploads/984f5c84-9f42-4567-b531-43a9b13b8552.png',
+      name: 'Red Button Choice'
     },
     {
-      url: '/lovable-uploads/47c547e4-e354-4c1c-ad0a-3fae785c3742.png',
-      name: 'Grievous Negotiator'
+      url: '/lovable-uploads/31fd2421-f639-4e43-b494-a8deb2cc8ff3.png',
+      name: 'Spongebob Pointing'
     },
     {
-      url: '/lovable-uploads/69fb5d58-34f4-4669-9322-556d4ab242bb.png',
-      name: 'Water Cannon'
+      url: '/lovable-uploads/f78d8307-89cc-4977-8b84-c0a367e46310.png',
+      name: 'Hide The Pain Harold'
     },
     {
-      url: '/lovable-uploads/fe0a98a3-2c6a-45e3-aa26-cfe8c77f57c9.png',
-      name: 'Buzz Cat Throw'
+      url: '/lovable-uploads/1608f8a5-891a-4d8c-b920-40bc4bd90b8a.png',
+      name: 'Matt Damon Aging'
     },
     {
-      url: '/lovable-uploads/d5658deb-79b2-4302-aa70-6e477a6b86af.png',
-      name: 'King of the Hill'
+      url: '/lovable-uploads/10de5f8f-91e8-425c-b3b6-ab5165c0bb1a.png',
+      name: 'Predator Handshake'
     },
     {
-      url: '/lovable-uploads/e61752da-929e-421d-a4e2-af0c5b254b1c.png',
-      name: 'You New Here'
+      url: '/lovable-uploads/b91f569c-f7a4-4344-ba61-2b8b0c5ed7ec.png',
+      name: 'The Office Handshake'
     },
     {
-      url: '/lovable-uploads/350b6678-b22b-4301-9f74-58d9b763cb56.png',
-      name: 'Study Lofi Girl'
+      url: '/lovable-uploads/818c33f7-5db2-4c8d-8680-7d5cf176a587.png',
+      name: 'Dave Chappelle'
     },
     {
-      url: '/lovable-uploads/d8dbd750-e16e-4238-bb28-79cbf9a3fd2a.png',
-      name: 'Gumball Kiss'
+      url: '/lovable-uploads/afdb1e53-36b2-4184-84c9-b45269fa6eeb.png',
+      name: 'Money Sleep'
     },
     {
-      url: '/lovable-uploads/bf7b0737-b9a9-4b30-91fc-d727a8456972.png',
-      name: 'Heaven NPC'
-    },
-    {
-      url: '/lovable-uploads/49495548-3240-4653-a7d3-a6ec501c79f8.png',
-      name: 'Tired Wojak'
-    },
-    {
-      url: '/lovable-uploads/dd853b5c-e25d-41ce-a136-6e1afc5babdd.png',
-      name: 'Chimp Hand'
-    },
-    {
-      url: '/lovable-uploads/52f14052-f58e-4c84-9fee-0e4ac18642d1.png',
-      name: 'Weird Walk'
+      url: '/lovable-uploads/26cc6e99-ac06-4ec7-97ce-afd2c9f09c0f.png',
+      name: 'Decision Buttons'
     }
   ];
 

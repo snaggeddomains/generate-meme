@@ -31,28 +31,28 @@ const Index = () => {
 
   const popularTemplates = [
     {
-      url: '/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png',
-      name: 'Buff Doge vs Cheems'
+      url: '/lovable-uploads/9581f077-87c7-4013-bd4b-72f8abb319a2.png',
+      name: 'Zac Efron Collage'
     },
     {
-      url: '/lovable-uploads/25cb8922-dd81-4a4b-8d8b-8597c18a33e7.png',
-      name: 'Its a Trap'
+      url: '/lovable-uploads/869b7d2b-b158-479f-b61a-6dfcc59c1d0d.png',
+      name: 'Highway Exit'
     },
     {
-      url: '/lovable-uploads/f97eb470-37ac-4d5a-aa93-6f35513c0f9c.png',
-      name: 'Every Day We Stray'
+      url: '/lovable-uploads/2433aa4e-ad2e-409f-bada-436ebb360bf7.png',
+      name: 'Kermit Mood'
     },
     {
-      url: '/lovable-uploads/a47b5d6c-5e5c-4aaa-9ff9-ceeb54755ecf.png',
-      name: 'Twin Reaction'
+      url: '/lovable-uploads/04abb2c3-6a1e-4ded-85b7-3893eb48cb40.png',
+      name: 'Will Smith Slap'
     },
     {
-      url: '/lovable-uploads/2728caa6-6184-4bf9-b511-657f438f9850.png',
-      name: 'Minecraft Furnace'
+      url: '/lovable-uploads/39dfe9a4-2ab1-438e-994c-2aa77e221057.png',
+      name: 'Shaq Surprise'
     },
     {
-      url: '/lovable-uploads/7e2728c3-7eb2-4adf-9ee7-426be67f99a6.png',
-      name: 'Simpson Sign'
+      url: '/lovable-uploads/f78d8307-89cc-4977-8b84-c0a367e46310.png',
+      name: 'Hide The Pain Harold'
     }
   ];
 
@@ -90,7 +90,7 @@ const Index = () => {
                 <div className="absolute -top-4 -left-4 w-full h-full rounded-lg bg-orange-400 opacity-20 animate-bounce-slow"></div>
                 <div className="relative overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-xl">
                   <img
-                    src="https://07be27b9-3848-4fb5-8ac3-95da123d9ce5.lovableproject.com/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png"
+                    src="/lovable-uploads/9581f077-87c7-4013-bd4b-72f8abb319a2.png"
                     alt="Meme example"
                     className="w-full h-auto"
                   />
