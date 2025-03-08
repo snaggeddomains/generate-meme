@@ -30,28 +30,28 @@ const Index = () => {
 
   const popularTemplates = [
     {
-      url: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
-      name: 'Matrix Code'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
-      name: 'Robot'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
-      name: 'Light Bulb'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
-      name: 'Foggy Mountain'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
-      name: 'Ocean Wave'
-    },
-    {
       url: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
       name: 'Sleepy Cat'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
+      name: 'Grey Kitten'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1441057206919-63d19fac2369?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
+      name: 'Penguins'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
+      name: 'Deer'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1560114928-40f1f1eb26a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
+      name: 'Smiling Dog'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
+      name: 'Cat & Dog'
     },
   ];
 
@@ -88,7 +88,7 @@ const Index = () => {
                 <div className="absolute -top-4 -left-4 w-full h-full rounded-lg bg-meme-pink opacity-20 animate-bounce-slow"></div>
                 <div className="relative overflow-hidden rounded-lg bg-white shadow-xl">
                   <img
-                    src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=540&h=400&q=80"
+                    src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-4.0.3&auto=format&fit=crop&w=540&h=400&q=80"
                     alt="Meme example"
                     className="w-full h-auto"
                   />

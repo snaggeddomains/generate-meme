@@ -4,16 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { 
   Download, 
   Type, 
   Image as ImageIcon, 
-  ArrowUp, 
-  ArrowDown,
   PlusCircle,
   MinusCircle,
-  RefreshCw
+  RefreshCw,
+  Palette
 } from "lucide-react";
 
 interface MemeText {
@@ -22,17 +22,68 @@ interface MemeText {
   x: number;
   y: number;
   fontSize: number;
+  color: string;
+  fontFamily: string;
 }
 
 const MemeEditor = () => {
   const [image, setImage] = useState<string | null>(null);
   const [texts, setTexts] = useState<MemeText[]>([
-    { id: "top", text: "TOP TEXT", x: 50, y: 10, fontSize: 36 },
-    { id: "bottom", text: "BOTTOM TEXT", x: 50, y: 90, fontSize: 36 }
+    { id: "top", text: "TOP TEXT", x: 50, y: 10, fontSize: 36, color: "#FFFFFF", fontFamily: "Impact" },
+    { id: "bottom", text: "BOTTOM TEXT", x: 50, y: 90, fontSize: 36, color: "#FFFFFF", fontFamily: "Impact" }
   ]);
   const [selectedTextId, setSelectedTextId] = useState<string | null>(null);
   const [imageLoading, setImageLoading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
+  const canvasPositionRef = useRef({ top: 0, left: 0, width: 0, height: 0 });
+
+  // Available font families
+  const fontFamilies = [
+    { value: "Impact", label: "Impact" },
+    { value: "Arial", label: "Arial" },
+    { value: "Comic Sans MS", label: "Comic Sans" },
+    { value: "Pacifico", label: "Pacifico" },
+    { value: "Oswald", label: "Oswald" },
+  ];
+
+  // Text colors
+  const textColors = [
+    "#FFFFFF", // White
+    "#000000", // Black
+    "#FF0000", // Red
+    "#00FF00", // Green
+    "#0000FF", // Blue
+    "#FFFF00", // Yellow
+    "#FF00FF", // Magenta
+    "#00FFFF", // Cyan
+    "#FFA500", // Orange
+    "#8B5CF6", // Purple
+    "#D946EF", // Pink
+    "#F97316", // Orange
+  ];
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      const updateCanvasPosition = () => {
+        const rect = canvasRef.current?.getBoundingClientRect();
+        if (rect) {
+          canvasPositionRef.current = {
+            top: rect.top + window.scrollY,
+            left: rect.left + window.scrollX,
+            width: rect.width,
+            height: rect.height
+          };
+        }
+      };
+
+      updateCanvasPosition();
+      window.addEventListener('resize', updateCanvasPosition);
+      return () => {
+        window.removeEventListener('resize', updateCanvasPosition);
+      };
+    }
+  }, [image]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -54,7 +105,9 @@ const MemeEditor = () => {
       text: "NEW TEXT",
       x: 50,
       y: 50,
-      fontSize: 36
+      fontSize: 36,
+      color: "#FFFFFF",
+      fontFamily: "Impact"
     };
     setTexts([...texts, newText]);
     setSelectedTextId(newId);
@@ -77,20 +130,6 @@ const MemeEditor = () => {
     ));
   };
 
-  const moveTextVertically = (direction: 'up' | 'down') => {
-    if (!selectedTextId) return;
-    
-    setTexts(texts.map(t => {
-      if (t.id === selectedTextId) {
-        const newY = direction === 'up' 
-          ? Math.max(0, t.y - 5) 
-          : Math.min(100, t.y + 5);
-        return { ...t, y: newY };
-      }
-      return t;
-    }));
-  };
-
   const updateTextSize = (value: number[]) => {
     if (!selectedTextId) return;
     
@@ -98,6 +137,57 @@ const MemeEditor = () => {
       t.id === selectedTextId ? { ...t, fontSize: value[0] } : t
     ));
   };
+
+  const updateTextColor = (color: string) => {
+    if (!selectedTextId) return;
+    
+    setTexts(texts.map(t => 
+      t.id === selectedTextId ? { ...t, color } : t
+    ));
+  };
+
+  const updateTextFont = (fontFamily: string) => {
+    if (!selectedTextId) return;
+    
+    setTexts(texts.map(t => 
+      t.id === selectedTextId ? { ...t, fontFamily } : t
+    ));
+  };
+
+  const handleTextMouseDown = (e: React.MouseEvent, textId: string) => {
+    e.preventDefault();
+    setSelectedTextId(textId);
+    setIsDragging(true);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !selectedTextId || !canvasRef.current) return;
+
+    const canvasRect = canvasPositionRef.current;
+    const x = ((e.clientX - canvasRect.left) / canvasRect.width) * 100;
+    const y = ((e.clientY - canvasRect.top) / canvasRect.height) * 100;
+
+    // Ensure x and y are within bounds
+    const boundedX = Math.max(0, Math.min(100, x));
+    const boundedY = Math.max(0, Math.min(100, y));
+
+    setTexts(texts.map(t => 
+      t.id === selectedTextId ? { ...t, x: boundedX, y: boundedY } : t
+    ));
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener('mouseup', handleMouseUp);
+      return () => {
+        window.removeEventListener('mouseup', handleMouseUp);
+      };
+    }
+  }, [isDragging]);
 
   const downloadMeme = () => {
     if (!canvasRef.current) return;
@@ -126,31 +216,31 @@ const MemeEditor = () => {
     ? texts.find(t => t.id === selectedTextId) 
     : null;
 
-  // Updated template images that are more fun/interesting
+  // Updated template images with animals
   const templateImages = [
-    {
-      url: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
-      name: 'Matrix Code'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
-      name: 'Robot'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
-      name: 'Light Bulb'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
-      name: 'Foggy Mountain'
-    },
-    {
-      url: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
-      name: 'Ocean Wave'
-    },
     {
       url: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
       name: 'Sleepy Cat'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
+      name: 'Grey Kitten'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1441057206919-63d19fac2369?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
+      name: 'Penguins'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
+      name: 'Deer'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1560114928-40f1f1eb26a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
+      name: 'Smiling Dog'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
+      name: 'Cat & Dog'
     },
   ];
 
@@ -186,6 +276,7 @@ const MemeEditor = () => {
               ref={canvasRef}
               className="meme-canvas-container relative mx-auto" 
               style={{ maxWidth: '100%' }}
+              onMouseMove={handleMouseMove}
             >
               {imageLoading ? (
                 <div className="flex items-center justify-center h-64">
@@ -201,16 +292,19 @@ const MemeEditor = () => {
                   {texts.map(text => (
                     <div
                       key={text.id}
-                      className={`absolute meme-text cursor-pointer ${selectedTextId === text.id ? 'ring-2 ring-primary ring-offset-2' : ''}`}
+                      className={`absolute meme-text cursor-move ${selectedTextId === text.id ? 'ring-2 ring-primary ring-offset-2' : ''}`}
                       style={{
                         top: `${text.y}%`,
                         left: `${text.x}%`,
                         transform: 'translate(-50%, -50%)',
                         fontSize: `${text.fontSize}px`,
                         maxWidth: '90%',
-                        padding: '0.25rem'
+                        padding: '0.25rem',
+                        color: text.color,
+                        fontFamily: text.fontFamily
                       }}
                       onClick={() => setSelectedTextId(text.id)}
+                      onMouseDown={(e) => handleTextMouseDown(e, text.id)}
                     >
                       {text.text}
                     </div>
@@ -308,25 +402,24 @@ const MemeEditor = () => {
                 </div>
                 
                 <div>
-                  <Label className="block mb-2">Position</Label>
-                  <div className="flex gap-2">
-                    <Button 
-                      variant="outline" 
-                      onClick={() => moveTextVertically('up')}
-                      className="flex-1"
-                    >
-                      <ArrowUp className="h-4 w-4" />
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      onClick={() => moveTextVertically('down')}
-                      className="flex-1"
-                    >
-                      <ArrowDown className="h-4 w-4" />
-                    </Button>
-                  </div>
+                  <Label htmlFor="text-font" className="block mb-2">Font Family</Label>
+                  <Select 
+                    value={selectedText.fontFamily} 
+                    onValueChange={updateTextFont}
+                  >
+                    <SelectTrigger id="text-font">
+                      <SelectValue placeholder="Select font" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {fontFamilies.map(font => (
+                        <SelectItem key={font.value} value={font.value}>
+                          {font.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
-                
+
                 <div>
                   <Label className="block mb-2">Font Size: {selectedText.fontSize}px</Label>
                   <Slider 
@@ -336,6 +429,30 @@ const MemeEditor = () => {
                     step={1}
                     onValueChange={updateTextSize}
                   />
+                </div>
+
+                <div>
+                  <Label className="block mb-2 flex items-center">
+                    <Palette className="mr-2 h-4 w-4" /> Text Color
+                  </Label>
+                  <div className="flex flex-wrap gap-2">
+                    {textColors.map(color => (
+                      <button
+                        key={color}
+                        type="button"
+                        className={`w-8 h-8 rounded-full border-2 ${selectedText.color === color ? 'border-meme-purple' : 'border-transparent'}`}
+                        style={{ backgroundColor: color }}
+                        onClick={() => updateTextColor(color)}
+                        aria-label={`Select color ${color}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-4 p-3 bg-muted rounded-md">
+                  <p className="text-sm text-muted-foreground text-center">
+                    <span className="font-semibold">Tip:</span> Drag text directly on the image to position it
+                  </p>
                 </div>
               </>
             ) : (
