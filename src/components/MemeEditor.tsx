@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,7 +37,6 @@ const MemeEditor = () => {
   const canvasRef = useRef<HTMLDivElement>(null);
   const canvasPositionRef = useRef({ top: 0, left: 0, width: 0, height: 0 });
 
-  // Available font families
   const fontFamilies = [
     { value: "Impact", label: "Impact" },
     { value: "Arial", label: "Arial" },
@@ -47,7 +45,6 @@ const MemeEditor = () => {
     { value: "Oswald", label: "Oswald" },
   ];
 
-  // Text colors
   const textColors = [
     "#FFFFFF", // White
     "#000000", // Black
@@ -167,7 +164,6 @@ const MemeEditor = () => {
     const x = ((e.clientX - canvasRect.left) / canvasRect.width) * 100;
     const y = ((e.clientY - canvasRect.top) / canvasRect.height) * 100;
 
-    // Ensure x and y are within bounds
     const boundedX = Math.max(0, Math.min(100, x));
     const boundedY = Math.max(0, Math.min(100, y));
 
@@ -216,32 +212,67 @@ const MemeEditor = () => {
     ? texts.find(t => t.id === selectedTextId) 
     : null;
 
-  // Updated template images with animals
   const templateImages = [
     {
-      url: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
-      name: 'Sleepy Cat'
+      url: 'https://i.imgur.com/HbI8rm7.jpg',
+      name: 'Drake Hotline Bling'
     },
     {
-      url: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
-      name: 'Grey Kitten'
+      url: 'https://i.imgur.com/rF42gFp.jpg',
+      name: 'Two Buttons'
     },
     {
-      url: 'https://images.unsplash.com/photo-1441057206919-63d19fac2369?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
-      name: 'Penguins'
+      url: 'https://i.imgur.com/c0YoAdG.jpg',
+      name: 'Distracted Boyfriend'
     },
     {
-      url: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
-      name: 'Deer'
+      url: 'https://i.imgur.com/dE5C9yI.jpg',
+      name: 'Running Away Balloon'
     },
     {
-      url: 'https://images.unsplash.com/photo-1560114928-40f1f1eb26a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
-      name: 'Smiling Dog'
+      url: 'https://i.imgur.com/ZoZKFhe.jpg',
+      name: 'UNO Draw 25'
     },
     {
-      url: 'https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80',
-      name: 'Cat & Dog'
+      url: 'https://i.imgur.com/2heNUdr.jpg',
+      name: 'Buff Doge vs. Cheems'
     },
+    {
+      url: 'https://i.imgur.com/sohWhy9.jpg',
+      name: 'Left Exit 12'
+    },
+    {
+      url: 'https://i.imgur.com/eTLpP9A.jpg',
+      name: 'Change My Mind'
+    },
+    {
+      url: 'https://i.imgur.com/5QvGYsE.jpg',
+      name: 'Bernie Asking For Support'
+    },
+    {
+      url: 'https://i.imgur.com/nLRPWHu.jpg',
+      name: 'Expanding Brain'
+    },
+    {
+      url: 'https://i.imgur.com/nfq9LOY.jpg',
+      name: 'Always Has Been'
+    },
+    {
+      url: 'https://i.imgur.com/wvSPYfB.jpg',
+      name: 'Monkey Puppet'
+    },
+    {
+      url: 'https://i.imgur.com/BPxORNi.jpg',
+      name: 'Disaster Girl'
+    },
+    {
+      url: 'https://i.imgur.com/v0Hhbrr.jpg',
+      name: 'Waiting Skeleton'
+    },
+    {
+      url: 'https://i.imgur.com/SbCRmwQ.jpg',
+      name: 'Is This a Pigeon'
+    }
   ];
 
   return (
@@ -346,7 +377,7 @@ const MemeEditor = () => {
             
             <div>
               <Label className="block mb-2">Quick Templates</Label>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-3 gap-2 max-h-[360px] overflow-y-auto pr-1">
                 {templateImages.map((template, index) => (
                   <div 
                     key={index}

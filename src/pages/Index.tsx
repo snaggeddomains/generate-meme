@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
@@ -30,28 +31,28 @@ const Index = () => {
 
   const popularTemplates = [
     {
-      url: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
-      name: 'Sleepy Cat'
+      url: 'https://i.imgur.com/HbI8rm7.jpg',
+      name: 'Drake Hotline'
     },
     {
-      url: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
-      name: 'Grey Kitten'
+      url: 'https://i.imgur.com/rF42gFp.jpg',
+      name: 'Two Buttons'
     },
     {
-      url: 'https://images.unsplash.com/photo-1441057206919-63d19fac2369?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
-      name: 'Penguins'
+      url: 'https://i.imgur.com/c0YoAdG.jpg',
+      name: 'Distracted BF'
     },
     {
-      url: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
-      name: 'Deer'
+      url: 'https://i.imgur.com/dE5C9yI.jpg',
+      name: 'Running Away'
     },
     {
-      url: 'https://images.unsplash.com/photo-1560114928-40f1f1eb26a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
-      name: 'Smiling Dog'
+      url: 'https://i.imgur.com/ZoZKFhe.jpg',
+      name: 'UNO Draw 25'
     },
     {
-      url: 'https://images.unsplash.com/photo-1497752531616-c3afd9760a11?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80',
-      name: 'Cat & Dog'
+      url: 'https://i.imgur.com/2heNUdr.jpg',
+      name: 'Buff Doge'
     },
   ];
 
@@ -149,8 +150,8 @@ const Index = () => {
                 className="block rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white dark:bg-card"
               >
                 <div className="overflow-hidden">
-                  <img
-                    src={template.url}
+                  <img 
+                    src={template.url} 
                     alt={`${template.name} template`}
                     className="w-full h-auto transition-transform hover:scale-105 duration-300"
                   />
