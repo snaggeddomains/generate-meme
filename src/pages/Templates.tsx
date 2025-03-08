@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 const Templates = () => {
-  // Updated templates with reliable image sources
+  // Updated templates with the newly uploaded images
   const templates = [
     {
       url: '/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png',
@@ -14,12 +14,12 @@ const Templates = () => {
       fallback: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b'
     },
     {
-      url: '/lovable-uploads/4ef6ba1e-ea94-40f5-a331-df2b2ac04bac.png',
+      url: '/lovable-uploads/24d9e8e6-996a-49b6-8b8e-4318cd5910a9.png',
       name: 'Kermit Meme',
       fallback: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7'
     },
     {
-      url: '/lovable-uploads/b1cb09a7-9e13-46dd-8b5f-7e50d501f949.png',
+      url: '/lovable-uploads/ec952d3a-5d11-4172-a488-ea4792c5a0dc.png',
       name: 'Will Smith Slap',
       fallback: 'https://images.unsplash.com/photo-1518770660439-4636190af475'
     }
@@ -36,7 +36,7 @@ const Templates = () => {
           {templates.map((template, index) => (
             <Link 
               key={index} 
-              to={`/create?template=${encodeURIComponent(template.fallback || template.url)}`}
+              to={`/create?template=${encodeURIComponent(template.url)}`}
               className="block rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
             >
               <div className="aspect-square overflow-hidden">
@@ -47,9 +47,9 @@ const Templates = () => {
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
-                    // Use Unsplash fallback images
                     target.src = template.fallback;
                     console.log(`Using fallback image for ${template.name}: ${template.fallback}`);
+                    toast.error(`Failed to load ${template.name} image, using fallback`);
                   }}
                 />
               </div>

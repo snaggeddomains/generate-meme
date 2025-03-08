@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -68,11 +69,11 @@ const MemeEditor = () => {
       name: 'Highway Exit Meme'
     },
     {
-      url: '/lovable-uploads/4ef6ba1e-ea94-40f5-a331-df2b2ac04bac.png',
+      url: '/lovable-uploads/24d9e8e6-996a-49b6-8b8e-4318cd5910a9.png',
       name: 'Kermit Meme'
     },
     {
-      url: '/lovable-uploads/b1cb09a7-9e13-46dd-8b5f-7e50d501f949.png',
+      url: '/lovable-uploads/ec952d3a-5d11-4172-a488-ea4792c5a0dc.png',
       name: 'Will Smith Slap'
     }
   ];

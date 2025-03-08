@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
@@ -30,7 +29,6 @@ const Index = () => {
     }
   ];
 
-  // Use the same templates with fallbacks as in Templates.tsx
   const popularTemplates = [
     {
       url: '/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png',
@@ -38,12 +36,12 @@ const Index = () => {
       fallback: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b'
     },
     {
-      url: '/lovable-uploads/4ef6ba1e-ea94-40f5-a331-df2b2ac04bac.png',
+      url: '/lovable-uploads/24d9e8e6-996a-49b6-8b8e-4318cd5910a9.png',
       name: 'Kermit Meme',
       fallback: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7'
     },
     {
-      url: '/lovable-uploads/b1cb09a7-9e13-46dd-8b5f-7e50d501f949.png',
+      url: '/lovable-uploads/ec952d3a-5d11-4172-a488-ea4792c5a0dc.png',
       name: 'Will Smith Slap',
       fallback: 'https://images.unsplash.com/photo-1518770660439-4636190af475'
     }
@@ -53,7 +51,6 @@ const Index = () => {
     <div className="flex flex-col min-h-screen">
       <NavBar />
 
-      {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-slate-900 dark:to-slate-800 text-foreground py-16 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="container px-4 sm:px-6 relative z-10">
@@ -118,7 +115,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Features Section */}
       <section className="py-16 bg-white dark:bg-background">
         <div className="container px-4 sm:px-6">
           <div className="text-center mb-12">
@@ -140,7 +136,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Popular Templates Section */}
       <section className="py-16 bg-slate-50 dark:bg-slate-800/30 relative">
         <div className="absolute inset-0 bg-dots-pattern opacity-10"></div>
         <div className="container px-4 sm:px-6 relative z-10">
@@ -188,7 +183,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-16 bg-gradient-to-br from-slate-100 to-white dark:from-slate-900 dark:to-slate-800">
         <div className="container px-4 sm:px-6">
           <div className="max-w-3xl mx-auto text-center">
