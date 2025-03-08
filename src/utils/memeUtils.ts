@@ -1,4 +1,3 @@
-
 // Google Drive public ID format: Convert the sharing URL to a direct image URL
 export const convertGoogleDriveUrl = (url: string) => {
   // Extract the file ID from the Google Drive sharing URL
@@ -9,19 +8,11 @@ export const convertGoogleDriveUrl = (url: string) => {
   return url;
 };
 
-// Template images for quick selection
+// Template images for quick selection - removed problematic ones
 export const templateImages = [
   {
     url: '/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png',
     name: 'Highway Exit Meme'
-  },
-  {
-    url: '/lovable-uploads/24d9e8e6-996a-49b6-8b8e-4318cd5910a9.png',
-    name: 'Kermit Meme'
-  },
-  {
-    url: '/lovable-uploads/ec952d3a-5d11-4172-a488-ea4792c5a0dc.png',
-    name: 'Will Smith Slap'
   },
   {
     url: '/lovable-uploads/02d162d5-0051-4e01-9453-f84dac7b779b.png',
@@ -39,7 +30,6 @@ export const templateImages = [
     url: '/lovable-uploads/90de871d-b892-4cc1-a2ef-45cb71a5af6d.png',
     name: 'Change My Mind'
   },
-  // New templates
   {
     url: '/lovable-uploads/33899fa4-54a0-4a2e-b9bd-b9d1637efab8.png',
     name: 'Distracted Boyfriend'
@@ -67,35 +57,6 @@ export const templateImages = [
   {
     url: '/lovable-uploads/dca06f66-5f29-43ed-9e68-1ce3e382ac56.png',
     name: 'Gru Plan'
-  },
-  // Adding the last batch of images
-  {
-    url: '/lovable-uploads/slap.png',
-    name: 'Will Smith Slap'
-  },
-  {
-    url: '/lovable-uploads/zac-efron.png',
-    name: 'Zac Efron Shrugging'
-  },
-  {
-    url: '/lovable-uploads/office-handshake.png',
-    name: 'Office Handshake'
-  },
-  {
-    url: '/lovable-uploads/crying-man.png',
-    name: 'Crying Man'
-  },
-  {
-    url: '/lovable-uploads/shaq.png',
-    name: 'Shocked Shaq'
-  },
-  {
-    url: '/lovable-uploads/spiderman-pointing.png',
-    name: 'Spiderman Pointing'
-  },
-  {
-    url: '/lovable-uploads/matt-damon-aging.png',
-    name: 'Matt Damon Aging'
   }
 ];
 

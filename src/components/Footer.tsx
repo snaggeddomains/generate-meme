@@ -25,7 +25,6 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Resources</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/blog" className="hover:text-meme-purple transition-colors">Blog</Link></li>
               <li><Link to="/about" className="hover:text-meme-purple transition-colors">About Us</Link></li>
               <li><Link to="/faq" className="hover:text-meme-purple transition-colors">FAQ</Link></li>
             </ul>

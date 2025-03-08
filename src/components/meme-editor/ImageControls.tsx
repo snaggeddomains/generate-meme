@@ -1,10 +1,11 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { templateImages } from "@/utils/memeUtils";
+import { successfullyLoadedImages } from "@/components/home/DriveUtils";
 
 interface ImageControlsProps {
   onImageSelect: (url: string) => void;
@@ -12,6 +13,21 @@ interface ImageControlsProps {
 
 const ImageControls = ({ onImageSelect }: ImageControlsProps) => {
   const [imageLoading, setImageLoading] = useState(false);
+  const [filteredTemplates, setFilteredTemplates] = useState(templateImages);
+
+  useEffect(() => {
+    // Filter templates to only show those that have successfully loaded
+    const timer = setTimeout(() => {
+      const loaded = templateImages.filter(template => 
+        successfullyLoadedImages.has(template.url)
+      );
+      if (loaded.length > 0) {
+        setFilteredTemplates(loaded);
+      }
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -53,7 +69,7 @@ const ImageControls = ({ onImageSelect }: ImageControlsProps) => {
         <div>
           <Label className="block mb-2">Quick Templates</Label>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-[360px] overflow-y-auto pr-1">
-            {templateImages.map((template, index) => (
+            {filteredTemplates.map((template, index) => (
               <div 
                 key={index}
                 className="overflow-hidden rounded-md cursor-pointer hover:ring-2 hover:ring-primary"
@@ -70,9 +86,6 @@ const ImageControls = ({ onImageSelect }: ImageControlsProps) => {
                     toast.error(`Failed to load ${template.name}`);
                   }}
                 />
-                <div className="p-1 text-center text-xs">
-                  {template.name}
-                </div>
               </div>
             ))}
           </div>

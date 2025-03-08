@@ -9,10 +9,9 @@ interface TemplateCardProps {
     name: string;
     fallback: string;
   };
-  hideTitle?: boolean;
 }
 
-const TemplateCard = ({ template, hideTitle = true }: TemplateCardProps) => {
+const TemplateCard = ({ template }: TemplateCardProps) => {
   return (
     <Link 
       to={`/create?template=${encodeURIComponent(template.url)}`}
@@ -33,11 +32,6 @@ const TemplateCard = ({ template, hideTitle = true }: TemplateCardProps) => {
           }}
         />
       </div>
-      {!hideTitle && (
-        <div className="p-3 text-center text-sm font-medium">
-          {template.name}
-        </div>
-      )}
     </Link>
   );
 };
