@@ -1,10 +1,20 @@
-
 export const convertGoogleDriveUrl = (url: string) => {
   const fileIdMatch = url.match(/\/d\/(.*?)\/view/);
   if (fileIdMatch && fileIdMatch[1]) {
     return `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`;
   }
   return url;
+};
+
+// Keep track of which images have loaded successfully
+export const successfullyLoadedImages = new Set<string>();
+
+export const markImageAsLoaded = (url: string) => {
+  successfullyLoadedImages.add(url);
+};
+
+export const isImageLoaded = (url: string) => {
+  return successfullyLoadedImages.has(url);
 };
 
 export const extractGoogleDriveFolderContents = async () => {

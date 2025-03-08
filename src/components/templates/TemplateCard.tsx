@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { markImageAsLoaded } from "@/components/home/DriveUtils";
 
 interface TemplateCardProps {
   template: {
@@ -8,9 +9,10 @@ interface TemplateCardProps {
     name: string;
     fallback: string;
   };
+  hideTitle?: boolean;
 }
 
-const TemplateCard = ({ template }: TemplateCardProps) => {
+const TemplateCard = ({ template, hideTitle = true }: TemplateCardProps) => {
   return (
     <Link 
       to={`/create?template=${encodeURIComponent(template.url)}`}
@@ -21,6 +23,7 @@ const TemplateCard = ({ template }: TemplateCardProps) => {
           src={template.url} 
           alt={`${template.name} template`}
           className="w-full h-full object-contain transition-transform hover:scale-105 duration-300"
+          onLoad={() => markImageAsLoaded(template.url)}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.onerror = null;
@@ -30,9 +33,11 @@ const TemplateCard = ({ template }: TemplateCardProps) => {
           }}
         />
       </div>
-      <div className="p-3 text-center text-sm font-medium">
-        {template.name}
-      </div>
+      {!hideTitle && (
+        <div className="p-3 text-center text-sm font-medium">
+          {template.name}
+        </div>
+      )}
     </Link>
   );
 };

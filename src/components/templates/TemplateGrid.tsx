@@ -1,7 +1,9 @@
 
+import { useEffect, useState } from "react";
 import TemplateCard from "./TemplateCard";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { successfullyLoadedImages } from "@/components/home/DriveUtils";
 
 interface TemplateGridProps {
   templates: Array<{
@@ -12,10 +14,26 @@ interface TemplateGridProps {
 }
 
 const TemplateGrid = ({ templates }: TemplateGridProps) => {
+  const [filteredTemplates, setFilteredTemplates] = useState(templates);
+
+  useEffect(() => {
+    // Initially show all, then filter after a brief delay
+    const timer = setTimeout(() => {
+      const loaded = templates.filter(template => 
+        successfullyLoadedImages.has(template.url)
+      );
+      if (loaded.length > 0) {
+        setFilteredTemplates(loaded);
+      }
+    }, 1500);
+    
+    return () => clearTimeout(timer);
+  }, [templates]);
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {templates.map((template, index) => (
+        {filteredTemplates.map((template, index) => (
           <TemplateCard key={index} template={template} />
         ))}
       </div>

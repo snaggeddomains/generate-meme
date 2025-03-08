@@ -9,7 +9,7 @@ import Hero from "@/components/home/Hero";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import TemplatesSection from "@/components/home/TemplatesSection";
 import CallToAction from "@/components/home/CallToAction";
-import { extractGoogleDriveFolderContents } from "@/components/home/DriveUtils";
+import { extractGoogleDriveFolderContents, markImageAsLoaded } from "@/components/home/DriveUtils";
 
 const Index = () => {
   const [popularTemplates, setPopularTemplates] = useState([
@@ -40,15 +40,20 @@ const Index = () => {
       const templateContents = await extractGoogleDriveFolderContents();
       
       if (templateContents.length > 0) {
-        const localTemplates = templateContents.map(item => ({
-          url: item.url || `/lovable-uploads/${item.id}.png`,
-          name: item.name,
-          fallback: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6'
-        }));
+        const localTemplates = templateContents.map(item => {
+          // Pre-load images to check which ones work
+          const img = new Image();
+          img.onload = () => markImageAsLoaded(item.url || `/lovable-uploads/${item.id}.png`);
+          img.src = item.url || `/lovable-uploads/${item.id}.png`;
+          
+          return {
+            url: item.url || `/lovable-uploads/${item.id}.png`,
+            name: item.name,
+            fallback: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6'
+          };
+        });
         
-        if (localTemplates.length === 0) {
-          toast.error("Failed to load template images, using defaults");
-        }
+        setPopularTemplates(localTemplates.slice(0, 4));
       }
     };
     

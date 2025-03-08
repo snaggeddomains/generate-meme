@@ -4,7 +4,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import TemplateGrid from "@/components/templates/TemplateGrid";
 import { toast } from "sonner";
-import { extractGoogleDriveFolderContents } from "@/components/home/DriveUtils";
+import { extractGoogleDriveFolderContents, markImageAsLoaded } from "@/components/home/DriveUtils";
 
 const Templates = () => {
   const [templates, setTemplates] = useState<Array<{url: string, name: string, fallback: string}>>([]);
@@ -17,14 +17,22 @@ const Templates = () => {
         const templateContents = await extractGoogleDriveFolderContents();
         
         if (templateContents.length > 0) {
-          const localTemplates = templateContents.map(item => ({
-            url: item.url || `/lovable-uploads/${item.id}.png`,
-            name: item.name,
-            fallback: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6' // Default fallback
-          }));
+          const localTemplates = templateContents.map(item => {
+            // Pre-load images to check which ones work
+            const img = new Image();
+            const url = item.url || `/lovable-uploads/${item.id}.png`;
+            img.onload = () => markImageAsLoaded(url);
+            img.src = url;
+            
+            return {
+              url: url,
+              name: item.name,
+              fallback: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6' // Default fallback
+            };
+          });
           
           setTemplates(localTemplates);
-          toast.success(`Loaded ${localTemplates.length} templates`);
+          toast.success(`Loaded template options`);
         }
       } catch (error) {
         console.error("Error fetching templates:", error);

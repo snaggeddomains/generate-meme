@@ -1,7 +1,9 @@
 
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { successfullyLoadedImages, markImageAsLoaded } from "./DriveUtils";
 
 interface TemplatesSectionProps {
   templates: Array<{
@@ -12,6 +14,23 @@ interface TemplatesSectionProps {
 }
 
 const TemplatesSection = ({ templates }: TemplatesSectionProps) => {
+  const [loadedTemplates, setLoadedTemplates] = useState<typeof templates>([]);
+
+  useEffect(() => {
+    // Initially, show all templates
+    setLoadedTemplates(templates);
+    
+    // After a brief delay, filter to only show successfully loaded images
+    const timer = setTimeout(() => {
+      const filtered = templates.filter(template => 
+        successfullyLoadedImages.has(template.url)
+      );
+      setLoadedTemplates(filtered.length > 0 ? filtered : templates.slice(0, 4));
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, [templates]);
+
   return (
     <section className="py-16 bg-slate-50 dark:bg-slate-800/30 relative">
       <div className="absolute inset-0 bg-dots-pattern opacity-10"></div>
@@ -24,7 +43,7 @@ const TemplatesSection = ({ templates }: TemplatesSectionProps) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {templates.map((template, index) => (
+          {loadedTemplates.map((template, index) => (
             <Link 
               key={index} 
               to={`/create?template=${encodeURIComponent(template.url)}`}
@@ -35,6 +54,7 @@ const TemplatesSection = ({ templates }: TemplatesSectionProps) => {
                   src={template.url} 
                   alt={`${template.name} template`}
                   className="w-full h-full object-contain transition-transform hover:scale-105 duration-300"
+                  onLoad={() => markImageAsLoaded(template.url)}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
@@ -42,9 +62,6 @@ const TemplatesSection = ({ templates }: TemplatesSectionProps) => {
                     console.log(`Using fallback image for ${template.name}: ${template.fallback}`);
                   }}
                 />
-              </div>
-              <div className="p-3 text-center font-medium">
-                {template.name}
               </div>
             </Link>
           ))}
