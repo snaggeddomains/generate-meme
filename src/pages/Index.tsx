@@ -30,19 +30,22 @@ const Index = () => {
     }
   ];
 
-  // Using the same template URLs as in Templates.tsx
+  // Use the same templates with fallbacks as in Templates.tsx
   const popularTemplates = [
     {
       url: '/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png',
-      name: 'Highway Exit Meme'
+      name: 'Highway Exit Meme',
+      fallback: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b'
     },
     {
       url: '/lovable-uploads/4ef6ba1e-ea94-40f5-a331-df2b2ac04bac.png',
-      name: 'Kermit Meme'
+      name: 'Kermit Meme',
+      fallback: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7'
     },
     {
       url: '/lovable-uploads/b1cb09a7-9e13-46dd-8b5f-7e50d501f949.png',
-      name: 'Will Smith Slap'
+      name: 'Will Smith Slap',
+      fallback: 'https://images.unsplash.com/photo-1518770660439-4636190af475'
     }
   ];
 
@@ -80,14 +83,14 @@ const Index = () => {
                 <div className="absolute -top-4 -left-4 w-full h-full rounded-lg bg-orange-400 opacity-20 animate-bounce-slow"></div>
                 <div className="relative overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-xl">
                   <img
-                    src="/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png"
+                    src={popularTemplates[0].url}
                     alt="Meme example"
                     className="w-full h-auto"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.onerror = null;
-                      target.src = '/placeholder.svg';
-                      console.error("Failed to load hero image");
+                      target.src = popularTemplates[0].fallback;
+                      console.log(`Using fallback image: ${popularTemplates[0].fallback}`);
                     }}
                   />
                   <div className="absolute top-4 left-0 right-0 text-center">
@@ -152,7 +155,7 @@ const Index = () => {
             {popularTemplates.map((template, index) => (
               <Link 
                 key={index} 
-                to={`/create?template=${encodeURIComponent(template.url)}`}
+                to={`/create?template=${encodeURIComponent(template.fallback || template.url)}`}
                 className="block rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
               >
                 <div className="overflow-hidden aspect-video">
@@ -163,9 +166,8 @@ const Index = () => {
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.onerror = null;
-                      target.src = '/placeholder.svg';
-                      toast.error(`Failed to load ${template.name}`);
-                      console.error(`Failed to load image: ${template.url}`);
+                      target.src = template.fallback;
+                      console.log(`Using fallback image for ${template.name}: ${template.fallback}`);
                     }}
                   />
                 </div>

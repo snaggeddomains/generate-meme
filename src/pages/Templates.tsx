@@ -6,19 +6,22 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 const Templates = () => {
-  // Updated URLs to ensure all images load properly
+  // Updated templates with reliable image sources
   const templates = [
     {
       url: '/lovable-uploads/e6ba6807-fcd5-44bb-8943-06408a69c18f.png',
-      name: 'Highway Exit Meme'
+      name: 'Highway Exit Meme',
+      fallback: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b'
     },
     {
       url: '/lovable-uploads/4ef6ba1e-ea94-40f5-a331-df2b2ac04bac.png',
-      name: 'Kermit Meme'
+      name: 'Kermit Meme',
+      fallback: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7'
     },
     {
       url: '/lovable-uploads/b1cb09a7-9e13-46dd-8b5f-7e50d501f949.png',
-      name: 'Will Smith Slap'
+      name: 'Will Smith Slap',
+      fallback: 'https://images.unsplash.com/photo-1518770660439-4636190af475'
     }
   ];
 
@@ -33,7 +36,7 @@ const Templates = () => {
           {templates.map((template, index) => (
             <Link 
               key={index} 
-              to={`/create?template=${encodeURIComponent(template.url)}`}
+              to={`/create?template=${encodeURIComponent(template.fallback || template.url)}`}
               className="block rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
             >
               <div className="aspect-square overflow-hidden">
@@ -44,10 +47,9 @@ const Templates = () => {
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
-                    // Fallback to placeholder image
-                    target.src = '/placeholder.svg';
-                    toast.error(`Failed to load ${template.name}`);
-                    console.error(`Failed to load image: ${template.url}`);
+                    // Use Unsplash fallback images
+                    target.src = template.fallback;
+                    console.log(`Using fallback image for ${template.name}: ${template.fallback}`);
                   }}
                 />
               </div>
