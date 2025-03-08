@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/NavBar";
@@ -31,27 +30,27 @@ const Index = () => {
 
   const popularTemplates = [
     {
-      url: '/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png',
+      url: 'https://07be27b9-3848-4fb5-8ac3-95da123d9ce5.lovableproject.com/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png',
       name: 'Buff Doge vs Cheems'
     },
     {
-      url: '/lovable-uploads/25cb8922-dd81-4a4b-8d8b-8597c18a33e7.png',
+      url: 'https://07be27b9-3848-4fb5-8ac3-95da123d9ce5.lovableproject.com/lovable-uploads/25cb8922-dd81-4a4b-8d8b-8597c18a33e7.png',
       name: 'Its a Trap'
     },
     {
-      url: '/lovable-uploads/f97eb470-37ac-4d5a-aa93-6f35513c0f9c.png',
+      url: 'https://07be27b9-3848-4fb5-8ac3-95da123d9ce5.lovableproject.com/lovable-uploads/f97eb470-37ac-4d5a-aa93-6f35513c0f9c.png',
       name: 'Every Day We Stray'
     },
     {
-      url: '/lovable-uploads/a47b5d6c-5e5c-4aaa-9ff9-ceeb54755ecf.png',
+      url: 'https://07be27b9-3848-4fb5-8ac3-95da123d9ce5.lovableproject.com/lovable-uploads/a47b5d6c-5e5c-4aaa-9ff9-ceeb54755ecf.png',
       name: 'Twin Reaction'
     },
     {
-      url: '/lovable-uploads/2728caa6-6184-4bf9-b511-657f438f9850.png',
+      url: 'https://07be27b9-3848-4fb5-8ac3-95da123d9ce5.lovableproject.com/lovable-uploads/2728caa6-6184-4bf9-b511-657f438f9850.png',
       name: 'Minecraft Furnace'
     },
     {
-      url: '/lovable-uploads/7e2728c3-7eb2-4adf-9ee7-426be67f99a6.png',
+      url: 'https://07be27b9-3848-4fb5-8ac3-95da123d9ce5.lovableproject.com/lovable-uploads/7e2728c3-7eb2-4adf-9ee7-426be67f99a6.png',
       name: 'Simpson Sign'
     }
   ];
@@ -90,7 +89,7 @@ const Index = () => {
                 <div className="absolute -top-4 -left-4 w-full h-full rounded-lg bg-orange-400 opacity-20 animate-bounce-slow"></div>
                 <div className="relative overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-xl">
                   <img
-                    src="/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png"
+                    src="https://07be27b9-3848-4fb5-8ac3-95da123d9ce5.lovableproject.com/lovable-uploads/ded0621f-61a3-4ac9-b29f-f589867034e1.png"
                     alt="Meme example"
                     className="w-full h-auto"
                   />
