@@ -53,20 +53,42 @@ export const downloadMeme = (
     return;
   }
 
+  // Apply additional styles to ensure clean rendering
+  const canvasElement = canvasRef.current;
+  const previousBgColor = canvasElement.style.backgroundColor;
+  
+  // Set explicit background color for the capture
+  canvasElement.style.backgroundColor = "transparent";
+
   html2canvas(canvasRef.current, {
     allowTaint: true,
     useCORS: true,
     logging: false,
+    backgroundColor: null, // Ensure transparent background
+    onclone: (document, clone) => {
+      // Find all text elements in the cloned document and ensure they have transparent backgrounds
+      const textElements = clone.querySelectorAll('.meme-text');
+      textElements.forEach((el) => {
+        if (el instanceof HTMLElement) {
+          el.style.backgroundColor = 'transparent';
+          el.style.background = 'transparent';
+        }
+      });
+    }
   })
     .then((canvas) => {
       const link = document.createElement("a");
       link.download = `meme-${new Date().getTime()}.png`;
       link.href = canvas.toDataURL("image/png");
       link.click();
+      // Restore previous background color
+      canvasElement.style.backgroundColor = previousBgColor;
       onSuccess?.();
     })
     .catch((error) => {
       console.error("Error generating image:", error);
+      // Restore previous background color
+      canvasElement.style.backgroundColor = previousBgColor;
       onError?.();
     });
 };

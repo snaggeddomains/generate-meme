@@ -117,6 +117,17 @@
   word-break: break-word;
   text-align: center;
   user-select: none;
+  background-color: transparent !important;
+  background: transparent !important;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+/* Adding stronger specificity for html2canvas */
+div.meme-canvas-container div span.meme-text {
+  background-color: transparent !important;
+  background: transparent !important;
 }
 
 /* Background patterns */

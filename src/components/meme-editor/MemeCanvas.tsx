@@ -107,7 +107,7 @@ const MemeCanvas = ({
             {texts.map(text => (
               <div
                 key={text.id}
-                className={`absolute meme-text ${
+                className={`absolute ${
                   selectedTextId === text.id 
                     ? 'ring-2 ring-primary ring-offset-2 cursor-move' 
                     : 'cursor-grab hover:ring-1 hover:ring-primary/50'
@@ -118,11 +118,9 @@ const MemeCanvas = ({
                   transform: 'translate(-50%, -50%)',
                   fontSize: `${text.fontSize}px`,
                   maxWidth: '90%',
-                  padding: '0.5rem 0.75rem',
+                  padding: '0.5rem',
                   borderRadius: '0.25rem',
-                  color: text.color,
                   fontFamily: text.fontFamily,
-                  textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000',
                   userSelect: 'none',
                   backgroundColor: 'transparent',
                   transition: isDragging ? 'none' : 'all 0.1s ease',
@@ -132,7 +130,15 @@ const MemeCanvas = ({
                 onClick={(e) => handleTextClick(e, text.id)}
                 onMouseDown={(e) => onTextMouseDown(e, text.id)}
               >
-                <span className="relative">
+                <span 
+                  className="meme-text"
+                  style={{
+                    color: text.color,
+                    display: 'inline-block',
+                    backgroundColor: 'transparent',
+                    textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 1px 1px 0 #000',
+                  }}
+                >
                   {text.text}
                   {selectedTextId === text.id && (
                     <div className="absolute -top-6 -right-6 bg-primary/90 text-white p-1 rounded-full shadow-md">
