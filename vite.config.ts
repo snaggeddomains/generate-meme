@@ -10,9 +10,9 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  // Use base with empty string for local development,
-  // and it will be replaced with the correct base during GitHub Actions build
-  base: mode  === "development" ? "/" : "/generate-meme/",
+  // Use empty string for base since this isn't being deployed to GitHub Pages
+  // but to a custom domain through Lovable
+  base: "/",
   plugins: [
     react(),
     mode === 'development' &&
