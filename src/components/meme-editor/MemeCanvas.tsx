@@ -57,6 +57,7 @@ const MemeCanvas = ({
 
   // Process the image URL to ensure it works with GitHub Pages
   const processedImageUrl = getPublicPath(image);
+  console.log("Image URL being used:", processedImageUrl);
 
   // Handle text click separately from drag operations
   const handleTextClick = (e: React.MouseEvent, textId: string) => {
@@ -95,9 +96,11 @@ const MemeCanvas = ({
               alt="Meme template" 
               className="max-w-full w-full"
               onError={(e) => {
+                console.error("Image failed to load:", processedImageUrl);
                 const target = e.target as HTMLImageElement;
                 target.onerror = null;
-                target.src = getPublicPath('https://placehold.co/600x400/lightgray/darkgray?text=Image+Loading+Failed');
+                // Use a base64 fallback instead of an external URL to ensure it always loads
+                target.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZDNkM2QzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iIzU1NTU1NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+SW1hZ2UgTG9hZGluZyBGYWlsZWQ8L3RleHQ+PC9zdmc+";
                 toast.error("Failed to load image");
               }}
             />
