@@ -42,40 +42,9 @@ const MemeEditor = () => {
     }
   }, [location]);
 
-  useEffect(() => {
+  // Update canvas position when canvas is mounted or window is resized
+  const updateCanvasPosition = () => {
     if (canvasRef.current) {
-      const updateCanvasPosition = () => {
-        const rect = canvasRef.current?.getBoundingClientRect();
-        if (rect) {
-          canvasPositionRef.current = {
-            top: rect.top + window.scrollY,
-            left: rect.left + window.scrollX,
-            width: rect.width,
-            height: rect.height
-          };
-        }
-      };
-
-      updateCanvasPosition();
-      window.addEventListener('resize', updateCanvasPosition);
-      window.addEventListener('scroll', updateCanvasPosition);
-      
-      // Add these event listeners for more reliable dragging
-      window.addEventListener('mousemove', handleGlobalMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-      
-      return () => {
-        window.removeEventListener('resize', updateCanvasPosition);
-        window.removeEventListener('scroll', updateCanvasPosition);
-        window.removeEventListener('mousemove', handleGlobalMouseMove);
-        window.removeEventListener('mouseup', handleMouseUp);
-      };
-    }
-  }, [image]);
-
-  // Make sure canvas position is accurate before starting drag
-  useEffect(() => {
-    if (isDragging && canvasRef.current) {
       const rect = canvasRef.current.getBoundingClientRect();
       canvasPositionRef.current = {
         top: rect.top + window.scrollY,
@@ -84,19 +53,56 @@ const MemeEditor = () => {
         height: rect.height
       };
     }
-  }, [isDragging]);
+  };
+
+  useEffect(() => {
+    updateCanvasPosition();
+    window.addEventListener('resize', updateCanvasPosition);
+    window.addEventListener('scroll', updateCanvasPosition);
+    
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (isDragging && selectedTextId && canvasRef.current) {
+        e.preventDefault();
+        
+        const canvasRect = canvasPositionRef.current;
+        
+        // Calculate position with the offset to maintain relative position to cursor
+        const x = ((e.clientX - canvasRect.left - dragOffsetRef.current.x) / canvasRect.width) * 100;
+        const y = ((e.clientY - canvasRect.top - dragOffsetRef.current.y) / canvasRect.height) * 100;
+
+        // Ensure text stays within the canvas boundaries
+        const boundedX = Math.max(5, Math.min(95, x));
+        const boundedY = Math.max(5, Math.min(95, y));
+
+        setTexts(texts.map(t => 
+          t.id === selectedTextId ? { ...t, x: boundedX, y: boundedY } : t
+        ));
+      }
+    };
+    
+    const handleGlobalMouseUp = () => {
+      if (isDragging) {
+        setIsDragging(false);
+        document.body.style.cursor = '';
+      }
+    };
+    
+    // Add global event listeners
+    window.addEventListener('mousemove', handleGlobalMouseMove);
+    window.addEventListener('mouseup', handleGlobalMouseUp);
+    
+    return () => {
+      window.removeEventListener('resize', updateCanvasPosition);
+      window.removeEventListener('scroll', updateCanvasPosition);
+      window.removeEventListener('mousemove', handleGlobalMouseMove);
+      window.removeEventListener('mouseup', handleGlobalMouseUp);
+    };
+  }, [isDragging, selectedTextId, texts]);
 
   const handleCanvasRefChange = (ref: React.RefObject<HTMLDivElement>) => {
     if (ref.current) {
       canvasRef.current = ref.current;
-      // Update canvas position immediately when ref changes
-      const rect = ref.current.getBoundingClientRect();
-      canvasPositionRef.current = {
-        top: rect.top + window.scrollY,
-        left: rect.left + window.scrollX,
-        width: rect.width,
-        height: rect.height
-      };
+      updateCanvasPosition();
     }
   };
 
@@ -141,16 +147,8 @@ const MemeEditor = () => {
     const selectedText = texts.find(t => t.id === textId);
     if (!selectedText) return;
     
-    // Immediately update the canvas position
-    if (canvasRef.current) {
-      const rect = canvasRef.current.getBoundingClientRect();
-      canvasPositionRef.current = {
-        top: rect.top + window.scrollY,
-        left: rect.left + window.scrollX,
-        width: rect.width,
-        height: rect.height
-      };
-    }
+    // Update canvas position
+    updateCanvasPosition();
     
     // Calculate drag offset relative to the text element's center
     const canvasRect = canvasPositionRef.current;
@@ -169,35 +167,8 @@ const MemeEditor = () => {
     document.body.style.cursor = 'grabbing';
   };
 
-  const handleGlobalMouseMove = (e: MouseEvent) => {
-    if (!isDragging || !selectedTextId || !canvasRef.current) return;
-
-    const canvasRect = canvasPositionRef.current;
-    
-    // Calculate position with the offset to maintain relative position to cursor
-    const x = ((e.clientX - canvasRect.left - dragOffsetRef.current.x) / canvasRect.width) * 100;
-    const y = ((e.clientY - canvasRect.top - dragOffsetRef.current.y) / canvasRect.height) * 100;
-
-    // Ensure text stays within the canvas boundaries
-    const boundedX = Math.max(5, Math.min(95, x));
-    const boundedY = Math.max(5, Math.min(95, y));
-
-    setTexts(texts.map(t => 
-      t.id === selectedTextId ? { ...t, x: boundedX, y: boundedY } : t
-    ));
-  };
-
-  // This is only for the canvas element's onMouseMove
   const handleMouseMove = (e: React.MouseEvent) => {
-    // We're using the global mouse move instead for better reliability
-  };
-
-  const handleMouseUp = () => {
-    if (isDragging) {
-      setIsDragging(false);
-      // Reset cursor
-      document.body.style.cursor = '';
-    }
+    // Use global mouse move handler instead
   };
 
   return (

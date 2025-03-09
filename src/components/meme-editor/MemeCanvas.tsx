@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Download, RefreshCw, GripHorizontal } from "lucide-react";
 import { MemeText, downloadMeme, getPublicPath } from "@/utils/memeUtils";
+import { ImageIcon } from "lucide-react";
 
 interface MemeCanvasProps {
   image: string | null;
@@ -61,11 +62,9 @@ const MemeCanvas = ({
   const handleTextClick = (e: React.MouseEvent, textId: string) => {
     e.stopPropagation(); // Prevent event from bubbling up
     
-    // If the text is already selected, don't trigger another selection
-    // This helps avoid the text jumping when clicked multiple times
-    if (selectedTextId === textId) return;
-    
-    onTextSelect(textId);
+    if (selectedTextId !== textId) {
+      onTextSelect(textId);
+    }
   };
 
   // Handle canvas background click to deselect text
@@ -107,7 +106,7 @@ const MemeCanvas = ({
                 key={text.id}
                 className={`absolute meme-text ${
                   selectedTextId === text.id 
-                    ? 'ring-2 ring-primary ring-offset-2 cursor-grabbing' 
+                    ? 'ring-2 ring-primary ring-offset-2 cursor-move' 
                     : 'cursor-grab hover:ring-1 hover:ring-primary/50'
                 }`}
                 style={{
@@ -125,6 +124,7 @@ const MemeCanvas = ({
                   backgroundColor: 'transparent',
                   transition: isDragging ? 'none' : 'all 0.1s ease',
                   zIndex: selectedTextId === text.id ? 10 : 1,
+                  pointerEvents: 'auto'
                 }}
                 onClick={(e) => handleTextClick(e, text.id)}
                 onMouseDown={(e) => onTextMouseDown(e, text.id)}
@@ -155,5 +155,4 @@ const MemeCanvas = ({
   );
 };
 
-import { ImageIcon } from "lucide-react";
 export default MemeCanvas;
