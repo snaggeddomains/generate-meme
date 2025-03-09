@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Download, RefreshCw } from "lucide-react";
-import { MemeText, downloadMeme } from "@/utils/memeUtils";
+import { MemeText, downloadMeme, getPublicPath } from "@/utils/memeUtils";
 
 interface MemeCanvasProps {
   image: string | null;
@@ -54,6 +54,9 @@ const MemeCanvas = ({
     );
   }
 
+  // Process the image URL to ensure it works with GitHub Pages
+  const processedImageUrl = getPublicPath(image);
+
   return (
     <>
       <div 
@@ -69,13 +72,13 @@ const MemeCanvas = ({
         ) : (
           <>
             <img 
-              src={image} 
+              src={processedImageUrl} 
               alt="Meme template" 
               className="max-w-full w-full"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.onerror = null;
-                target.src = 'https://placehold.co/600x400/lightgray/darkgray?text=Image+Loading+Failed';
+                target.src = getPublicPath('https://placehold.co/600x400/lightgray/darkgray?text=Image+Loading+Failed');
                 toast.error("Failed to load image");
               }}
             />

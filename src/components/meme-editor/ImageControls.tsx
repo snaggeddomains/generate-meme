@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { templateImages } from "@/utils/memeUtils";
+import { templateImages, getPublicPath } from "@/utils/memeUtils";
 import { successfullyLoadedImages } from "@/components/home/DriveUtils";
 
 interface ImageControlsProps {
@@ -76,13 +76,13 @@ const ImageControls = ({ onImageSelect }: ImageControlsProps) => {
                 onClick={() => useTemplateImage(template.url)}
               >
                 <img 
-                  src={template.url} 
+                  src={getPublicPath(template.url)} 
                   alt={`${template.name} template`}
                   className="w-full h-auto object-cover"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
-                    target.src = 'https://placehold.co/150x150/lightgray/darkgray?text=Failed';
+                    target.src = getPublicPath('https://placehold.co/150x150/lightgray/darkgray?text=Failed');
                     toast.error(`Failed to load ${template.name}`);
                   }}
                 />

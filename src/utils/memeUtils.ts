@@ -1,4 +1,5 @@
 
+
 // Google Drive public ID format: Convert the sharing URL to a direct image URL
 export const convertGoogleDriveUrl = (url: string) => {
   // Extract the file ID from the Google Drive sharing URL
@@ -7,6 +8,22 @@ export const convertGoogleDriveUrl = (url: string) => {
     return `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`;
   }
   return url;
+};
+
+// Function to ensure paths work correctly on both local and GitHub Pages environments
+export const getPublicPath = (path: string) => {
+  // If the path is already an absolute URL or a data URL, return it as is
+  if (path.startsWith('http') || path.startsWith('data:')) {
+    return path;
+  }
+  
+  // For relative paths, ensure they work with GitHub Pages base path
+  // This accounts for when GitHub Pages deploys to username.github.io/repo-name/
+  // Make sure we're not adding duplicate slashes
+  const basePath = import.meta.env.BASE_URL || '/';
+  return path.startsWith('/') 
+    ? `${basePath.endsWith('/') ? basePath.slice(0, -1) : basePath}${path}`
+    : `${basePath.endsWith('/') ? basePath : `${basePath}/`}${path}`;
 };
 
 // Template images for quick selection - removed problematic ones
