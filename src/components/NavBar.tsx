@@ -10,8 +10,8 @@ const NavBar = () => {
   return (
     <nav className="border-b py-3 px-4 sm:px-6 bg-white dark:bg-card shadow-sm">
       <div className="container flex items-center justify-between">
-        <Link to="/" className="flex items-center space-x-2">
-          <span className="font-bold text-xl sm:text-2xl bg-gradient-to-r from-meme-purple to-meme-pink text-transparent bg-clip-text">
+        <Link to="/" className="flex items-center">
+          <span className="font-bold text-lg sm:text-xl md:text-2xl bg-gradient-to-r from-meme-purple to-meme-pink text-transparent bg-clip-text truncate max-w-[180px] sm:max-w-none">
             GenerateMeme.com
           </span>
         </Link>
@@ -34,7 +34,11 @@ const NavBar = () => {
         {/* Mobile Navigation Button */}
         <div className="md:hidden flex items-center">
           <Link to="/create" className="mr-2">
-            <Button variant="default" size="sm" className="bg-meme-purple hover:bg-meme-purple/90">
+            <Button 
+              variant="default" 
+              size="sm" 
+              className="bg-meme-purple hover:bg-meme-purple/90 px-2 py-1 h-8 text-xs"
+            >
               Create
             </Button>
           </Link>
@@ -42,9 +46,9 @@ const NavBar = () => {
             variant="ghost" 
             size="sm" 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-1"
+            className="p-1 h-8 w-8"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-4 w-4" />
           </Button>
         </div>
       </div>
