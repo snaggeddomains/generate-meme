@@ -18,6 +18,7 @@ const MemeEditor = () => {
   const [isDragging, setIsDragging] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
   const canvasPositionRef = useRef({ top: 0, left: 0, width: 0, height: 0 });
+  const dragOffsetRef = useRef({ x: 0, y: 0 });
   const location = useLocation();
 
   useEffect(() => {
@@ -57,8 +58,15 @@ const MemeEditor = () => {
 
       updateCanvasPosition();
       window.addEventListener('resize', updateCanvasPosition);
+      
+      // Add these event listeners for more reliable dragging
+      window.addEventListener('mousemove', handleGlobalMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+      
       return () => {
         window.removeEventListener('resize', updateCanvasPosition);
+        window.removeEventListener('mousemove', handleGlobalMouseMove);
+        window.removeEventListener('mouseup', handleMouseUp);
       };
     }
   }, [image]);
@@ -66,6 +74,14 @@ const MemeEditor = () => {
   const handleCanvasRefChange = (ref: React.RefObject<HTMLDivElement>) => {
     if (ref.current) {
       canvasRef.current = ref.current;
+      // Update canvas position immediately when ref changes
+      const rect = ref.current.getBoundingClientRect();
+      canvasPositionRef.current = {
+        top: rect.top + window.scrollY,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+        height: rect.height
+      };
     }
   };
 
@@ -103,35 +119,50 @@ const MemeEditor = () => {
     e.preventDefault();
     setSelectedTextId(textId);
     setIsDragging(true);
+    
+    // Get selected text position
+    const selectedText = texts.find(t => t.id === textId);
+    if (!selectedText) return;
+    
+    // Calculate drag offset relative to the text element's center
+    const canvasRect = canvasPositionRef.current;
+    const textCenterX = (selectedText.x / 100) * canvasRect.width;
+    const textCenterY = (selectedText.y / 100) * canvasRect.height;
+    
+    dragOffsetRef.current = {
+      x: e.clientX - (canvasRect.left + textCenterX),
+      y: e.clientY - (canvasRect.top + textCenterY)
+    };
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleGlobalMouseMove = (e: MouseEvent) => {
     if (!isDragging || !selectedTextId || !canvasRef.current) return;
 
     const canvasRect = canvasPositionRef.current;
-    const x = ((e.clientX - canvasRect.left) / canvasRect.width) * 100;
-    const y = ((e.clientY - canvasRect.top) / canvasRect.height) * 100;
+    
+    // Calculate position with the offset to maintain relative position to cursor
+    const x = ((e.clientX - canvasRect.left - dragOffsetRef.current.x) / canvasRect.width) * 100;
+    const y = ((e.clientY - canvasRect.top - dragOffsetRef.current.y) / canvasRect.height) * 100;
 
-    const boundedX = Math.max(0, Math.min(100, x));
-    const boundedY = Math.max(0, Math.min(100, y));
+    // Ensure text stays within the canvas boundaries
+    const boundedX = Math.max(5, Math.min(95, x));
+    const boundedY = Math.max(5, Math.min(95, y));
 
     setTexts(texts.map(t => 
       t.id === selectedTextId ? { ...t, x: boundedX, y: boundedY } : t
     ));
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
+  // This is only for the canvas element's onMouseMove
+  const handleMouseMove = (e: React.MouseEvent) => {
+    // We're using the global mouse move instead for better reliability
   };
 
-  useEffect(() => {
+  const handleMouseUp = () => {
     if (isDragging) {
-      window.addEventListener('mouseup', handleMouseUp);
-      return () => {
-        window.removeEventListener('mouseup', handleMouseUp);
-      };
+      setIsDragging(false);
     }
-  }, [isDragging]);
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
