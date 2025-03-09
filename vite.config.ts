@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => ({
   },
   // Use base with empty string for local development,
   // and it will be replaced with the correct base during GitHub Actions build
-  base: '',
+  base: mode  === "development" ? "/" : "/generate-meme/",
   plugins: [
     react(),
     mode === 'development' &&
