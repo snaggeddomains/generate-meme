@@ -58,20 +58,63 @@ export const downloadMeme = (
   const previousBgColor = canvasElement.style.backgroundColor;
   
   // Set explicit background color for the capture
-  canvasElement.style.backgroundColor = "transparent";
+  canvasElement.style.backgroundColor = "white";
+  
+  // Find all text containers and ensure they're properly styled
+  const textContainers = canvasElement.querySelectorAll('.meme-text-container');
+  const textElements = canvasElement.querySelectorAll('.meme-text');
+  
+  // Store original styles to restore later
+  const originalStyles: {el: HTMLElement, bg: string, boxShadow: string}[] = [];
+  
+  // Apply transparent styles to text elements
+  textContainers.forEach((container) => {
+    if (container instanceof HTMLElement) {
+      originalStyles.push({
+        el: container,
+        bg: container.style.backgroundColor,
+        boxShadow: container.style.boxShadow
+      });
+      container.style.backgroundColor = 'transparent';
+      container.style.boxShadow = 'none';
+    }
+  });
+  
+  textElements.forEach((el) => {
+    if (el instanceof HTMLElement) {
+      originalStyles.push({
+        el: el,
+        bg: el.style.backgroundColor,
+        boxShadow: el.style.boxShadow
+      });
+      el.style.backgroundColor = 'transparent';
+      el.style.boxShadow = 'none';
+    }
+  });
 
   html2canvas(canvasRef.current, {
     allowTaint: true,
     useCORS: true,
     logging: false,
-    backgroundColor: null, // Ensure transparent background
+    backgroundColor: "white", // Use white background for the entire canvas
     onclone: (document, clone) => {
       // Find all text elements in the cloned document and ensure they have transparent backgrounds
+      const textContainers = clone.querySelectorAll('.meme-text-container');
       const textElements = clone.querySelectorAll('.meme-text');
+      
+      textContainers.forEach((container) => {
+        if (container instanceof HTMLElement) {
+          container.style.backgroundColor = 'transparent';
+          container.style.background = 'transparent';
+          container.style.boxShadow = 'none';
+        }
+      });
+      
       textElements.forEach((el) => {
         if (el instanceof HTMLElement) {
           el.style.backgroundColor = 'transparent';
           el.style.background = 'transparent';
+          el.style.boxShadow = 'none';
         }
       });
     }
@@ -81,12 +124,26 @@ export const downloadMeme = (
       link.download = `meme-${new Date().getTime()}.png`;
       link.href = canvas.toDataURL("image/png");
       link.click();
+      
+      // Restore original styles
+      originalStyles.forEach(({el, bg, boxShadow}) => {
+        el.style.backgroundColor = bg;
+        el.style.boxShadow = boxShadow;
+      });
+      
       // Restore previous background color
       canvasElement.style.backgroundColor = previousBgColor;
       onSuccess?.();
     })
     .catch((error) => {
       console.error("Error generating image:", error);
+      
+      // Restore original styles
+      originalStyles.forEach(({el, bg, boxShadow}) => {
+        el.style.backgroundColor = bg;
+        el.style.boxShadow = boxShadow;
+      });
+      
       // Restore previous background color
       canvasElement.style.backgroundColor = previousBgColor;
       onError?.();

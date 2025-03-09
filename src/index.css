@@ -124,10 +124,19 @@
   margin: 0;
 }
 
+/* Removing any box, padding, margins or backgrounds that could cause issues */
+.meme-text-container {
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 /* Adding stronger specificity for html2canvas */
+div.meme-canvas-container div.meme-text-container,
 div.meme-canvas-container div span.meme-text {
   background-color: transparent !important;
   background: transparent !important;
+  box-shadow: none !important;
 }
 
 /* Background patterns */

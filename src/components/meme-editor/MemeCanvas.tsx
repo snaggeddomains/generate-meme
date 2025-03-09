@@ -107,7 +107,7 @@ const MemeCanvas = ({
             {texts.map(text => (
               <div
                 key={text.id}
-                className={`absolute ${
+                className={`absolute meme-text-container ${
                   selectedTextId === text.id 
                     ? 'ring-2 ring-primary ring-offset-2 cursor-move' 
                     : 'cursor-grab hover:ring-1 hover:ring-primary/50'
