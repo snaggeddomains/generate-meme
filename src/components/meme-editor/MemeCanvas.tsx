@@ -2,7 +2,7 @@
 import { useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Download, RefreshCw, Move } from "lucide-react";
+import { Download, RefreshCw, GripHorizontal } from "lucide-react";
 import { MemeText, downloadMeme, getPublicPath } from "@/utils/memeUtils";
 
 interface MemeCanvasProps {
@@ -57,13 +57,33 @@ const MemeCanvas = ({
   // Process the image URL to ensure it works with GitHub Pages
   const processedImageUrl = getPublicPath(image);
 
+  // Handle text click separately from drag operations
+  const handleTextClick = (e: React.MouseEvent, textId: string) => {
+    e.stopPropagation(); // Prevent event from bubbling up
+    
+    // If the text is already selected, don't trigger another selection
+    // This helps avoid the text jumping when clicked multiple times
+    if (selectedTextId === textId) return;
+    
+    onTextSelect(textId);
+  };
+
+  // Handle canvas background click to deselect text
+  const handleCanvasClick = (e: React.MouseEvent) => {
+    // Only deselect if we're not in the middle of a drag operation
+    if (!isDragging && e.target === canvasRef.current) {
+      onTextSelect(null);
+    }
+  };
+
   return (
     <>
       <div 
         ref={canvasRef}
-        className="meme-canvas-container relative mx-auto" 
+        className="meme-canvas-container relative mx-auto rounded-md overflow-hidden" 
         style={{ maxWidth: '100%', touchAction: 'none' }}
         onMouseMove={onMouseMove}
+        onClick={handleCanvasClick}
       >
         {imageLoading ? (
           <div className="flex items-center justify-center h-64">
@@ -85,29 +105,35 @@ const MemeCanvas = ({
             {texts.map(text => (
               <div
                 key={text.id}
-                className={`absolute meme-text ${selectedTextId === text.id ? 'ring-2 ring-primary ring-offset-2 cursor-grabbing' : 'cursor-grab hover:ring-1 hover:ring-primary/30'}`}
+                className={`absolute meme-text ${
+                  selectedTextId === text.id 
+                    ? 'ring-2 ring-primary ring-offset-2 cursor-grabbing' 
+                    : 'cursor-grab hover:ring-1 hover:ring-primary/50'
+                }`}
                 style={{
                   top: `${text.y}%`,
                   left: `${text.x}%`,
                   transform: 'translate(-50%, -50%)',
                   fontSize: `${text.fontSize}px`,
                   maxWidth: '90%',
-                  padding: '0.25rem',
+                  padding: '0.5rem 0.75rem',
+                  borderRadius: '0.25rem',
                   color: text.color,
                   fontFamily: text.fontFamily,
                   textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000',
                   userSelect: 'none',
                   backgroundColor: 'transparent',
                   transition: isDragging ? 'none' : 'all 0.1s ease',
+                  zIndex: selectedTextId === text.id ? 10 : 1,
                 }}
-                onClick={() => onTextSelect(text.id)}
+                onClick={(e) => handleTextClick(e, text.id)}
                 onMouseDown={(e) => onTextMouseDown(e, text.id)}
               >
                 <span className="relative">
                   {text.text}
                   {selectedTextId === text.id && (
-                    <div className="absolute -top-6 -right-6 bg-primary/80 text-white p-1 rounded-full">
-                      <Move size={16} />
+                    <div className="absolute -top-6 -right-6 bg-primary/90 text-white p-1 rounded-full shadow-md">
+                      <GripHorizontal size={16} />
                     </div>
                   )}
                 </span>

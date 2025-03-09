@@ -58,6 +58,7 @@ const MemeEditor = () => {
 
       updateCanvasPosition();
       window.addEventListener('resize', updateCanvasPosition);
+      window.addEventListener('scroll', updateCanvasPosition);
       
       // Add these event listeners for more reliable dragging
       window.addEventListener('mousemove', handleGlobalMouseMove);
@@ -65,11 +66,25 @@ const MemeEditor = () => {
       
       return () => {
         window.removeEventListener('resize', updateCanvasPosition);
+        window.removeEventListener('scroll', updateCanvasPosition);
         window.removeEventListener('mousemove', handleGlobalMouseMove);
         window.removeEventListener('mouseup', handleMouseUp);
       };
     }
   }, [image]);
+
+  // Make sure canvas position is accurate before starting drag
+  useEffect(() => {
+    if (isDragging && canvasRef.current) {
+      const rect = canvasRef.current.getBoundingClientRect();
+      canvasPositionRef.current = {
+        top: rect.top + window.scrollY,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+        height: rect.height
+      };
+    }
+  }, [isDragging]);
 
   const handleCanvasRefChange = (ref: React.RefObject<HTMLDivElement>) => {
     if (ref.current) {
@@ -117,12 +132,25 @@ const MemeEditor = () => {
 
   const handleTextMouseDown = (e: React.MouseEvent, textId: string) => {
     e.preventDefault();
+    e.stopPropagation();
+    
+    // Set the text as selected
     setSelectedTextId(textId);
-    setIsDragging(true);
     
     // Get selected text position
     const selectedText = texts.find(t => t.id === textId);
     if (!selectedText) return;
+    
+    // Immediately update the canvas position
+    if (canvasRef.current) {
+      const rect = canvasRef.current.getBoundingClientRect();
+      canvasPositionRef.current = {
+        top: rect.top + window.scrollY,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+        height: rect.height
+      };
+    }
     
     // Calculate drag offset relative to the text element's center
     const canvasRect = canvasPositionRef.current;
@@ -133,6 +161,12 @@ const MemeEditor = () => {
       x: e.clientX - (canvasRect.left + textCenterX),
       y: e.clientY - (canvasRect.top + textCenterY)
     };
+    
+    // Set dragging state to true
+    setIsDragging(true);
+    
+    // Set cursor to grabbing
+    document.body.style.cursor = 'grabbing';
   };
 
   const handleGlobalMouseMove = (e: MouseEvent) => {
@@ -161,6 +195,8 @@ const MemeEditor = () => {
   const handleMouseUp = () => {
     if (isDragging) {
       setIsDragging(false);
+      // Reset cursor
+      document.body.style.cursor = '';
     }
   };
 
