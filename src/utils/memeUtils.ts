@@ -1,3 +1,4 @@
+
 import html2canvas from "html2canvas";
 import { toast } from "sonner";
 
@@ -10,6 +11,36 @@ export interface MemeText {
   color: string;
   fontFamily: string;
 }
+
+// Add font families for the meme text
+export const fontFamilies = [
+  { value: "Impact", label: "Impact" },
+  { value: "Arial", label: "Arial" },
+  { value: "Helvetica", label: "Helvetica" },
+  { value: "Comic Sans MS", label: "Comic Sans MS" },
+  { value: "Times New Roman", label: "Times New Roman" },
+  { value: "Courier New", label: "Courier New" },
+  { value: "Verdana", label: "Verdana" },
+  { value: "Georgia", label: "Georgia" }
+];
+
+// Add text colors for the meme text
+export const textColors = [
+  "#FFFFFF", // White
+  "#000000", // Black
+  "#FF0000", // Red
+  "#00FF00", // Green
+  "#0000FF", // Blue
+  "#FFFF00", // Yellow
+  "#FF00FF", // Magenta
+  "#00FFFF", // Cyan
+  "#FFA500", // Orange
+  "#800080", // Purple
+  "#008000", // Dark Green
+  "#FFC0CB", // Pink
+  "#A52A2A", // Brown
+  "#808080"  // Gray
+];
 
 export const downloadMeme = (
   canvasRef: React.RefObject<HTMLDivElement>,
